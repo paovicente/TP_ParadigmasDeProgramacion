@@ -15,9 +15,19 @@ namespace EngineGDI
             public float X, Y, ScaleX, ScaleY;
             public float Angle, OffsetX, OffsetY;
         }
+        private class TextDrawCommand
+        {
+            public string Text;
+            public float X;
+            public float Y;
+            public float FontSize;
+            public string FontName;
+            public Color Color;
+        }
         private static Dictionary<string, Image> textures = new Dictionary<string, Image>();
         private static Dictionary<string, SoundPlayer> sounds = new Dictionary<string, SoundPlayer>();
         private static List<DrawCommand> drawQueue = new List<DrawCommand>();
+        private static List<TextDrawCommand> textDrawQueue = new List<TextDrawCommand>();
         private static GameForm window;
         public static bool IsWindowOpen { get; private set; } = false;
         public static Form Window => window;
@@ -98,6 +108,19 @@ namespace EngineGDI
             window.ClearColor = color;
         }
 
+        public static void DrawText(string text, float x, float y, float fontSize = 24f, Color? color = null, string fontName = "Arial")
+        {
+            textDrawQueue.Add(new TextDrawCommand
+            {
+                Text = text,
+                X = x,
+                Y = y,
+                FontSize = fontSize,
+                FontName = fontName,
+                Color = color ?? Color.White
+            });
+        }
+
         public static bool OnKeyDown(Keys key)
         {
             if (pressedKeys.Contains(key) && !handledKeys.Contains(key))
@@ -165,6 +188,25 @@ namespace EngineGDI
                         e.Graphics.ResetTransform();
                     }
                 }
+                foreach (var cmd in textDrawQueue)
+                {
+                    string safeFontName = string.IsNullOrWhiteSpace(cmd.FontName) ? "Consolas" : cmd.FontName;
+                    FontFamily family = FontFamily.GenericSansSerif;
+                    try
+                    {
+                        family = new FontFamily(safeFontName);
+                    }
+                    catch
+                    {
+                        family = new FontFamily("Consolas");
+                    }
+
+                    using (var font = new Font(family, cmd.FontSize))
+                    using (var brush = new SolidBrush(cmd.Color))
+                    {
+                        e.Graphics.DrawString(cmd.Text, font, brush, cmd.X, cmd.Y);
+                    }
+                }
                 float debugY = 10;
                 foreach (var msg in debugMessages)
                 {
@@ -172,6 +214,7 @@ namespace EngineGDI
                     debugY += debugFont.Height + 2;
                 }
                 drawQueue.Clear();
+                textDrawQueue.Clear();
             }
         }
     }
