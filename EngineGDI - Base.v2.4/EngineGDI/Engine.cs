@@ -108,7 +108,7 @@ namespace EngineGDI
             window.ClearColor = color;
         }
 
-        public static void DrawText(string text, float x, float y, float fontSize = 24f, Color? color = null, string fontName = "Arial")
+        public static void DrawText(string text, float x, float y, float fontSize = 22f, Color? color = null, string fontName = "Arial")
         {
             textDrawQueue.Add(new TextDrawCommand
             {

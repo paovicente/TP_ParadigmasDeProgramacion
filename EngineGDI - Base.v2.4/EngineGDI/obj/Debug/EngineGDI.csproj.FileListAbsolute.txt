@@ -71,3 +71,6 @@ C:\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\obj\Debug\
 C:\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\obj\Debug\EngineGDI.exe
 C:\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\obj\Debug\EngineGDI.pdb
 C:\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\ButtonTest.png
+C:\Users\Usuario\Documents\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\ButtonTest.png
+C:\Users\Usuario\Documents\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\fondomenu.png
+C:\Users\Usuario\Documents\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\button1.png

@@ -10,18 +10,18 @@ namespace EngineGDI
         public MainMenu()
         {
             buttons.Add(new Button(
-                "JUGAR",
+                "PLAY",
                 MenuAction.Play,
-                "ButtonTest.png",
+                "button1.png",
                 new Vector2(512, 240),
-                new Vector2(0.28f, 0.28f)
+                new Vector2(1.5f, 3f)
             ));
             buttons.Add(new Button(
-                "SALIR",
+                "EXIT",
                 MenuAction.Exit,
-                "ButtonTest.png",
-                new Vector2(512, 405),
-                new Vector2(0.28f, 0.28f)
+                "button1.png",
+                new Vector2(512, 350),
+                new Vector2(1.5f, 3f)
             ));
             selectedIndex = 0;
         }
@@ -52,7 +52,7 @@ namespace EngineGDI
 
         public override void Render()
         {
-            Engine.Draw("fondo1.png", 0, 0);
+            Engine.Draw("fondomenu.png", 0, 0,1f,0.5f);
 
             foreach (Button button in buttons)
             {
@@ -72,7 +72,7 @@ namespace EngineGDI
 
                 Color textColor = button.IsSelected ? Color.Gold : Color.White;
                 float textX = button.Position.X - 37f;
-                float textY = button.Position.Y - 11f;
+                float textY = button.Position.Y - 15f;
                 Engine.DrawText(button.Label, textX, textY, 18f, textColor, "Arial");
             }
         }
