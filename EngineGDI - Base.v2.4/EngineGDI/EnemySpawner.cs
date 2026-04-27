@@ -12,15 +12,18 @@ namespace EngineGDI
 
         private Random rng = new Random();
 
-        //encapsulation
+        private List<EnemyType> availableEnemies;
+        private Player player;
+
         public List<Enemy> Enemies => enemies;
 
-        
-        public EnemySpawner(float cooldown)
+        public EnemySpawner(float cooldown, Player player, List<EnemyType> availableEnemies)
         {
             enemies = new List<Enemy>();
             spawnCooldown = cooldown;
             spawnTimer = cooldown;
+            this.player = player;
+            this.availableEnemies = availableEnemies;
         }
 
         public void Update(float deltaTime, int screenWidth)
@@ -38,14 +41,40 @@ namespace EngineGDI
                 e.Update(deltaTime);
             }
 
-            //checks the enemies that have overtaken the screen and erases them
-            enemies.RemoveAll(e => e.Pos.Y > Program.SCREEN_HEIGHT);
+            enemies.RemoveAll(e => !e.IsActive);
         }
 
         private void Spawn(int screenWidth)
         {
             float x = (float)rng.NextDouble() * screenWidth;
-            enemies.Add(new Enemy("BasicEnemy.png", new Vector2(x, 0)));
+            Vector2 spawnPos = new Vector2(x, 0);
+
+            EnemyType type = availableEnemies[rng.Next(availableEnemies.Count)];
+
+            Enemy enemy = CreateEnemy(type, spawnPos);
+
+            enemies.Add(enemy);
+        }
+
+        private Enemy CreateEnemy(EnemyType type, Vector2 pos)
+        {
+            switch (type)
+            {
+                case EnemyType.Bouncing:
+                    return new BouncingEnemy("BasicEnemy.png", pos);
+
+                case EnemyType.Spiral:
+                    return new SpiralEnemy("SpiralEnemy.png", pos);
+
+                case EnemyType.Chaser:
+                    return new ChaserEnemy("BasicEnemy.png", pos, player);
+
+                case EnemyType.Boss:
+                    return new BossEnemy("BasicEnemy.png", pos, player);
+
+                default:
+                    throw new Exception("Enemy type not supported");
+            }
         }
     }
 }

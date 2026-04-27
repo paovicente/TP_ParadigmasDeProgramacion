@@ -22,6 +22,12 @@ namespace EngineGDI
 
         public static Player Player { get; private set; }
         public static EnemySpawner EnemySpawner { get; private set; }
+        
+        private List<EnemyType> level1Enemies = new List<EnemyType>
+        {
+            EnemyType.Bouncing,
+            EnemyType.Spiral
+        };
 
         //constructor
         private GameManager()
@@ -31,7 +37,8 @@ namespace EngineGDI
         public void Initialize()
         {
             Player = new Player("PlayerTest.png", new Vector2(40, 490));
-            EnemySpawner = new EnemySpawner(2f);
+
+            EnemySpawner = new EnemySpawner(2f, Player, level1Enemies);
         }
 
         public void Update(float deltaTime, int screenWidth)
@@ -40,56 +47,10 @@ namespace EngineGDI
 
             EnemySpawner.Update(deltaTime, screenWidth);
 
-            HandleCollisions();
-        }
-
-        /*private void HandleCollisions()
-        {
-            var enemies = EnemySpawner.Enemies;
-            var bullets = Player.Shooter.Projectiles;
-
-            foreach (var enemy in enemies)
-            {
-                if (!enemy.IsActive) continue;
-
-                foreach (var bullet in bullets)
-                {
-                    if (!bullet.IsActive) continue;
-
-                    if (Collision.IsBoxColliding(
-                        bullet.Position, bullet.Size,
-                        enemy.Pos, enemy.Size))
-                    {
-                        bullet.Deactivate();
-                        enemy.Deactivate();
-                    }
-                }
-            }
-        }*/
-
-        private void HandleCollisions()
-        {
-            var enemies = EnemySpawner.Enemies;
-            var bullets = Player.Shooter.Projectiles;
-
-            for (int i = enemies.Count - 1; i >= 0; i--)
-            {
-                var enemy = enemies[i];
-
-                for (int j = bullets.Count - 1; j >= 0; j--)
-                {
-                    var bullet = bullets[j];
-
-                    if (Collision.IsBoxColliding(
-                        bullet.Position, bullet.Size,
-                        enemy.Pos, enemy.Size))
-                    {
-                        bullets.RemoveAt(j);
-                        enemies.RemoveAt(i);
-                        break;
-                    }
-                }
-            }
+            CollisionSystem.HandleCollisions(
+                EnemySpawner.Enemies,
+                Player.Shooter.Projectiles
+            );
         }
 
         public void Render()
@@ -123,7 +84,7 @@ namespace EngineGDI
                     e.Sprite,
                     e.Pos.X,
                     e.Pos.Y,
-                    0.01f, 0.01f,
+                    e.Size.X, e.Size.Y,
                     0,
                     0.5f, 0.5f
                 );
