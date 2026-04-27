@@ -3,7 +3,7 @@ using System;
 
 namespace EngineGDI
 {
-    public class Enemy
+    /*public class Enemy
     {
         private Vector2 pos;
         private Vector2 size = new Vector2(16, 16);
@@ -40,7 +40,7 @@ namespace EngineGDI
             /*if (pos.Y > Program.SCREEN_HEIGHT)
             {
                 isActive = false;
-            }*/
+            }
         }
 
         private void PickRandomDirection()
@@ -63,5 +63,37 @@ namespace EngineGDI
         {
             isActive = false;
         }
+    }*/
+    public abstract class Enemy
+    {
+        protected Vector2 pos;
+        protected Vector2 size = new Vector2(0.05f, 0.05f);
+        protected string sprite;
+        protected bool isActive = true;
+
+        public Vector2 Pos => pos;
+        public Vector2 Size => size;
+        public string Sprite => sprite;
+        public bool IsActive => isActive;
+
+        public Enemy(string sprite, Vector2 startPos)
+        {
+            this.sprite = sprite;
+            this.pos = startPos;
+        }
+
+        public abstract void Update(float deltaTime);
+
+        protected virtual void CheckIfOutOfScreen()
+        {
+            if (pos.Y > Program.SCREEN_HEIGHT)
+                Deactivate();
+        }
+
+        public virtual void Deactivate()
+        {
+            isActive = false;
+        }
+
     }
 }

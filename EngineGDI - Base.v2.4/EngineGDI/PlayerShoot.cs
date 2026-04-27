@@ -18,7 +18,7 @@ namespace EngineGDI
 
             for (int i = 0; i < 20; i++) //bullet limit (temp solution - apply object pool later)
             {
-                projectiles.Add(new Projectile("Bullet.png", 150f));
+                projectiles.Add(new Projectile("Bullet.png", 250f));
             }
         }
 
