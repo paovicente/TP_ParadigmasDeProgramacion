@@ -48,7 +48,7 @@ namespace EngineGDI
             sessionTimeLeft = SessionDuration;
             sessionScore = 0;
 
-            Player = new Player("PlayerTest.png", new Vector2(40, 490));
+            Player = new Player("PlayerFrame1.png", new Vector2(40, 490));
 
             EnemySpawner = new EnemySpawner(2f, Player, level1Enemies);
         }

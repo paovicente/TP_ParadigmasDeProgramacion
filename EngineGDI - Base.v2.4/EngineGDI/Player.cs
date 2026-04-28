@@ -16,6 +16,11 @@ namespace EngineGDI
         private Movement movement;
         private string sprite;
 
+        private readonly string[] animationFrames;
+        private int frameIndex;
+        private float frameTimer;
+        private const float AnimationDurationSeconds = 1f; // 4 frames en 1 segundo
+
         //public getters, can be read from outside the class but not write
         public Vector2 Pos => pos;
         public float Speed => speed;
@@ -25,7 +30,17 @@ namespace EngineGDI
 
         public Player(string sprite, Vector2 pos)
         {
-            this.sprite = sprite;
+            animationFrames = new[]
+            {
+                "PlayerFrame1.png",
+                "PlayerFrame2.png",
+                "PlayerFrame3.png",
+                "PlayerFrame4.png"
+            };
+
+            frameIndex = 0;
+            frameTimer = 0f;
+            this.sprite = animationFrames[0];
             this.pos = pos;
 
             shooter = new PlayerShoot();
@@ -35,7 +50,24 @@ namespace EngineGDI
         public void Update()
         {
             HandleInput();
+            UpdateAnimation(Program.deltaTime);
             shooter.Update(Program.deltaTime);
+        }
+
+        private void UpdateAnimation(float deltaTime)
+        {
+            if (animationFrames.Length == 0)
+                return;
+
+            float frameDuration = AnimationDurationSeconds / animationFrames.Length; // 0.25s por frame
+            frameTimer += deltaTime;
+
+            while (frameTimer >= frameDuration)
+            {
+                frameTimer -= frameDuration;
+                frameIndex = (frameIndex + 1) % animationFrames.Length;
+                sprite = animationFrames[frameIndex];
+            }
         }
 
         private void HandleInput()
