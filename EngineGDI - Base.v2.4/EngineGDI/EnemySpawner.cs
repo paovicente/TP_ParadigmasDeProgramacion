@@ -61,7 +61,7 @@ namespace EngineGDI
             switch (type)
             {
                 case EnemyType.Bouncing:
-                    return new BouncingEnemy("BasicEnemy.png", pos);
+                    return new BouncingEnemy("BouncingEnemy.png", pos);
 
                 case EnemyType.Spiral:
                     return new SpiralEnemy("SpiralEnemy.png", pos);

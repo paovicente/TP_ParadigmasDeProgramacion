@@ -75,3 +75,8 @@ C:\Users\Usuario\Documents\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v
 C:\Users\Usuario\Documents\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\fondomenu.png
 C:\Users\Usuario\Documents\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\button1.png
 C:\Users\Usuario\Documents\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\SpiralEnemy.png
+C:\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\button1.png
+C:\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\fondomenu.png
+C:\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\SpiralEnemy.png
+C:\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\BouncingEnemy.png
+C:\Users\Usuario\Documents\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\BouncingEnemy.png

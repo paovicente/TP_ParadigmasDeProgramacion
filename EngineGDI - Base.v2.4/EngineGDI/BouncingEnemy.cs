@@ -9,6 +9,8 @@ namespace EngineGDI
         private Movement movement;
         private static Random rng = new Random();
 
+        public override int PointsOnKill => 3;
+
         public BouncingEnemy(string sprite, Vector2 startPos)
             : base(sprite, startPos)
         {

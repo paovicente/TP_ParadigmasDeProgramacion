@@ -76,6 +76,15 @@ namespace EngineGDI
         public string Sprite => sprite;
         public bool IsActive => isActive;
 
+        /// <summary>Puntos que suma el jugador al eliminar este enemigo con un proyectil.</summary>
+        public virtual int PointsOnKill => 0;
+
+        /// <summary>
+        /// Escala visual al dibujar el sprite. Por defecto coincide con el tamaño lógico (size),
+        /// pero se puede overridear para pixelart sin afectar la hitbox/mecánicas.
+        /// </summary>
+        public virtual Vector2 RenderScale => size;
+
         public Enemy(string sprite, Vector2 startPos)
         {
             this.sprite = sprite;

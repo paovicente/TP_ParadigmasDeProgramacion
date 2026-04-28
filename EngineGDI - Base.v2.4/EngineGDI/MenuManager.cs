@@ -5,7 +5,8 @@ namespace EngineGDI
         private enum MenuState
         {
             InMenu,
-            InGame
+            InGame,
+            EndScreen
         }
 
         private static MenuManager instance;
@@ -56,12 +57,34 @@ namespace EngineGDI
                 return;
             }
 
+            if (currentState == MenuState.EndScreen)
+            {
+                currentMenu.Update();
+                MenuAction action = currentMenu.SelectedAction;
+
+                if (action == MenuAction.BackToMenu)
+                {
+                    currentMenu = new MainMenu();
+                    currentMenu.Initialize();
+                    currentState = MenuState.InMenu;
+                }
+
+                return;
+            }
+
             GameManager.Instance.Update(deltaTime, screenWidth);
+
+            if (GameManager.Instance.SessionEnded)
+            {
+                currentMenu = new FinalMenu(GameManager.Instance.SessionVictory);
+                currentMenu.Initialize();
+                currentState = MenuState.EndScreen;
+            }
         }
 
         public void Render()
         {
-            if (currentState == MenuState.InMenu)
+            if (currentState == MenuState.InMenu || currentState == MenuState.EndScreen)
             {
                 currentMenu.Render();
                 return;
