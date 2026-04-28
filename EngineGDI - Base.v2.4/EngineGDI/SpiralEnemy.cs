@@ -8,6 +8,8 @@ namespace EngineGDI
         private float radius;
         private Vector2 center;
 
+        public override int PointsOnKill => 5;
+
         public SpiralEnemy(string sprite, Vector2 startPos)
             : base(sprite, startPos)
         {

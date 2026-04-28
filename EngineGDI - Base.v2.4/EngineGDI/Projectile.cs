@@ -22,7 +22,6 @@ namespace EngineGDI
             isActive = false;
         }
 
-        //activate the projectile
         public void Activate(Vector2 startPosition, Vector2 dir)
         {
             position = startPosition;
@@ -30,7 +29,6 @@ namespace EngineGDI
             isActive = true;
         }
 
-        //movement
         public void Update(float deltaTime)
         {
             if (!isActive) return;

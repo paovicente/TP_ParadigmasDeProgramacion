@@ -57,6 +57,7 @@
     <Compile Include="GameManager.cs" />
     <Compile Include="Movement.cs" />
     <Compile Include="EnemySpawner.cs" />
+    <Compile Include="FinalMenu.cs" />
     <Compile Include="Engine.cs" />
     <Compile Include="MainMenu.cs" />
     <Compile Include="Menu.cs" />
@@ -94,7 +95,13 @@
     <Content Include="BasicEnemy.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="BouncingEnemy.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Bullet.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SpiralEnemy.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="button1.png">
@@ -110,9 +117,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="PlayerTest.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="SpiralEnemy.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Textures\Animations\1.png">

@@ -6,7 +6,8 @@ namespace EngineGDI
     {
         None,
         Play,
-        Exit
+        Exit,
+        BackToMenu
     }
 
     public abstract class Menu
