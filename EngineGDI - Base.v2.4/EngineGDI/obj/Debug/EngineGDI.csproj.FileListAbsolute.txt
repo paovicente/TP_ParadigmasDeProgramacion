@@ -78,11 +78,7 @@ C:\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\
 C:\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\fondomenu.png
 C:\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\SpiralEnemy.png
 C:\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\BouncingEnemy.png
-<<<<<<< Updated upstream
-C:\Users\Usuario\Documents\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\BouncingEnemy.png
-=======
 C:\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\PlayerFrame2.png
 C:\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\PlayerFrame3.png
 C:\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\PlayerFrame4.png
 C:\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\PlayerFrame1.png
->>>>>>> Stashed changes
