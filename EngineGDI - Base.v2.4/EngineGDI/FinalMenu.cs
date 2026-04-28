@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace EngineGDI
 {
-    /// <summary>Pantalla de victoria o derrota con un único botón para volver al menú principal.</summary>
+    /// <summary>Victory or defeat screen with a button to return to menu</summary>
     public class FinalMenu : Menu
     {
         private readonly bool victory;

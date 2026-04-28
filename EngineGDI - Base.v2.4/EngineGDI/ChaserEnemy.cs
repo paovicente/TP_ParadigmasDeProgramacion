@@ -19,8 +19,9 @@ namespace EngineGDI
             Vector2 toPlayer = player.Pos - pos;
             float mag = toPlayer.Magnitude();
 
-            // Evitar Normalize() sobre vector nulo o no finito (quedaría (0,0) y no se mueve).
             Vector2 direction;
+
+            //to avoid divide by 0
             if (float.IsNaN(mag) || float.IsInfinity(mag) || mag < 1e-5f)
             {
                 direction = new Vector2(0f, 1f);
