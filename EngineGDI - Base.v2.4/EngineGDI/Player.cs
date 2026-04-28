@@ -19,7 +19,7 @@ namespace EngineGDI
         private readonly string[] animationFrames;
         private int frameIndex;
         private float frameTimer;
-        private const float AnimationDurationSeconds = 1f; // 4 frames en 1 segundo
+        private const float AnimationDurationSeconds = 1f; //4 frames in 1 second
 
         //public getters, can be read from outside the class but not write
         public Vector2 Pos => pos;
@@ -59,7 +59,7 @@ namespace EngineGDI
             if (animationFrames.Length == 0)
                 return;
 
-            float frameDuration = AnimationDurationSeconds / animationFrames.Length; // 0.25s por frame
+            float frameDuration = AnimationDurationSeconds / animationFrames.Length; //0.25s per frame
             frameTimer += deltaTime;
 
             while (frameTimer >= frameDuration)

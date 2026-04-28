@@ -31,7 +31,6 @@ C:\Users\Usuario\Documents\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v
 C:\Users\Usuario\Documents\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\EngineGDI.pdb
 C:\Users\Usuario\Documents\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\obj\Debug\EngineGDI.exe.config
 C:\Users\Usuario\Documents\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\fondo1.png
-C:\Users\Usuario\Documents\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\PlayerTest.png
 C:\Users\Usuario\Documents\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\Bullet.png
 C:\Users\Usuario\Documents\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\BasicEnemy.png
 C:\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\BasicEnemy.png
@@ -82,3 +81,8 @@ C:\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\
 C:\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\PlayerFrame3.png
 C:\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\PlayerFrame4.png
 C:\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\PlayerFrame1.png
+C:\Users\Usuario\Documents\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\BouncingEnemy.png
+C:\Users\Usuario\Documents\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\PlayerFrame2.png
+C:\Users\Usuario\Documents\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\PlayerFrame3.png
+C:\Users\Usuario\Documents\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\PlayerFrame4.png
+C:\Users\Usuario\Documents\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\PlayerFrame1.png
