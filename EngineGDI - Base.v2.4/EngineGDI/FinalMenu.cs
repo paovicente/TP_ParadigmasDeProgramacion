@@ -33,7 +33,7 @@ namespace EngineGDI
         {
             this.victory = victory;
             buttons.Add(new Button(
-                "VOLVER AL MENU",
+                "RETURN TO MENU",
                 MenuAction.BackToMenu,
                 "button1.png",
                 new Vector2(512, 320),
@@ -59,7 +59,7 @@ namespace EngineGDI
         {
             Engine.Draw("fondomenu.png", 0, 0, 1f, 0.5f);
 
-            string title = victory ? "VICTORIA" : "DERROTA";
+            string title = victory ? "VICTORY" : "DEFEAT";
             Color titleColor = victory ? Color.LawnGreen : Color.IndianRed;
             float titleW = MeasureTextWidthPx(title, 36f, "Arial");
             float titleX = Program.SCREEN_WIDTH / 2f - titleW / 2f;

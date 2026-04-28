@@ -90,7 +90,6 @@ namespace EngineGDI
         {
             Engine.Draw("fondo1.png", 0, 0);
 
-            // Pixelart: escalas visuales centralizadas (no afectan colisiones/mecánicas).
             const float playerRenderScale = 3.0f;
             const float enemyRenderScale = 3.0f;
             const float projectileRenderScale = 0.50f;
@@ -135,7 +134,7 @@ namespace EngineGDI
                     secondsLeft = 0;
 
                 Engine.DrawText(
-                    "Tiempo: " + secondsLeft + " s",
+                    "Time Left: " + secondsLeft + " s",
                     16f,
                     12f,
                     22f,
@@ -143,7 +142,7 @@ namespace EngineGDI
                     "Consolas");
 
                 Engine.DrawText(
-                    "Puntos: " + sessionScore + " / " + PointsToWin,
+                    "Points: " + sessionScore + " / " + PointsToWin,
                     Program.SCREEN_WIDTH - 320f,
                     12f,
                     22f,
