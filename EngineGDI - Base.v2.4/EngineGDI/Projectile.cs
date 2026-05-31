@@ -1,6 +1,6 @@
 namespace EngineGDI
 {
-    public class Projectile
+    public class Projectile: IPoolable
     {
         private Vector2 position;
         private Vector2 direction;

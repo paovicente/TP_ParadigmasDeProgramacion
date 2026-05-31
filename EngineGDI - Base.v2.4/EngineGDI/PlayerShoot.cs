@@ -8,36 +8,33 @@ namespace EngineGDI
 {
     public class PlayerShoot
     {
-        private List<Projectile> projectiles;
+        private ObjectPool<Projectile> projectilePool;
 
-        public List<Projectile> Projectiles => projectiles;
+        public List<Projectile> Projectiles => projectilePool.Objects;
 
         public PlayerShoot()
         {
-            projectiles = new List<Projectile>();
+            projectilePool = new ObjectPool<Projectile>(20, CreateProjectile);
+        }
 
-            for (int i = 0; i < 20; i++) //bullet limit (temp solution - apply object pool later)
-            {
-                projectiles.Add(new Projectile("Bullet.png", 250f));
-            }
+        private Projectile CreateProjectile()
+        {
+            return new Projectile("Bullet.png",250f);
         }
 
         public void Shoot(Vector2 pos)
         {
-            foreach (var proj in projectiles)
+            Projectile proj = projectilePool.Get();
+
+            if (proj != null)
             {
-                if (!proj.IsActive)
-                {
-                    proj.Activate(pos,
-                                  new Vector2(0f, -1f)); //up
-                    break;
-                }
+                proj.Activate(pos,new Vector2(0f, -1f));
             }
         }
 
         public void Update(float deltaTime)
         {
-            foreach (var proj in projectiles)
+            foreach (var proj in projectilePool.Objects)
             {
                 proj.Update(deltaTime);
             }
