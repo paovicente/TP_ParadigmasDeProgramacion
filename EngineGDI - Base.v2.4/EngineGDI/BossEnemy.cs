@@ -1,23 +1,60 @@
+using System;
+
 namespace EngineGDI 
 {
     public class BossEnemy : Enemy
     {
         private int health;
         private Player player;
+        private Movement movement;
+        private Vector2 direction;
+
+        private static Random rng = new Random();
+
+        public override int PointsOnKill => 6;
+        public override Vector2 RenderScale => new Vector2(1.5f, 1.5f);
 
         public BossEnemy(string sprite, Vector2 startPos, Player player)
             :base(sprite, startPos)
         {
             this.player = player;
-            health = 10;
+            health = 4;
+
+            movement = new Movement(50f);
+
+            PickRandomDirection();
         }
 
         public override void Update(float deltaTime)
         {
-            
+            movement.Move(ref pos, direction, deltaTime);
+
+            CheckPlayerCollision();
+
+            KeepInsideScreen();
         }
 
-        public void TakeDamage(int dmg)
+        private void PickRandomDirection()
+        {
+            float x = (float)(rng.NextDouble() * 2 - 1);
+            float y = (float)(rng.NextDouble()* 2 - 1);
+            direction = new Vector2(x, y).Normalize();
+        }
+
+        private void KeepInsideScreen()
+        {
+            if (pos.X < 0 || pos.X > Program.SCREEN_WIDTH)
+            {
+                direction.X *= -1;
+            }
+
+            if (pos.Y < 0 || pos.Y > Program.SCREEN_HEIGHT)
+            {
+                direction.Y *= -1;
+            }
+        }
+
+        public override void TakeDamage(int dmg)
         {
             health -= dmg;
 
@@ -31,15 +68,23 @@ namespace EngineGDI
         {
             isActive = false;
 
-            SpawnMinions();
+            RequestSpawn(pos);
         }
 
-        private void SpawnMinions()
+        private void CheckPlayerCollision()
         {
-            for (int i = 0; i < 5; i++)
+            float distance =
+                (player.Pos - pos).Magnitude();
+
+            float hitDistance = 25f;
+
+            if (distance <= hitDistance)
             {
-                //to see later how to do it
+                NotifyPlayerHit(10f);
+
+                Deactivate();
             }
         }
+
     }
 }

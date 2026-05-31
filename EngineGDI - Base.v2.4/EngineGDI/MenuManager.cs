@@ -28,6 +28,11 @@ namespace EngineGDI
         {
             currentState = MenuState.InMenu;
             currentMenu = new MainMenu();
+
+            //events subscription
+            GameManager.Instance.OnLevelCompleted += HandleLevelCompleted;
+
+            GameManager.Instance.OnGameOver += HandleGameOver;
         }
 
         public void Initialize()
@@ -80,6 +85,22 @@ namespace EngineGDI
                 currentMenu.Initialize();
                 currentState = MenuState.EndScreen;
             }
+        }
+
+        private void HandleLevelCompleted(int nextLevel)
+        {
+            GameManager.Instance.StartLevel(nextLevel);
+
+            currentState = MenuState.InGame;
+        }
+
+        private void HandleGameOver()
+        {
+            currentMenu = new FinalMenu(false);
+
+            currentMenu.Initialize();
+
+            currentState = MenuState.EndScreen;
         }
 
         public void Render()

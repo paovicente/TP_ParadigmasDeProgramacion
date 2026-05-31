@@ -9,7 +9,7 @@ namespace EngineGDI
         private Vector2 center;
 
         public override int PointsOnKill => 5;
-
+        public override Vector2 RenderScale => new Vector2(3f, 3f);
         public SpiralEnemy(string sprite, Vector2 startPos)
             : base(sprite, startPos)
         {

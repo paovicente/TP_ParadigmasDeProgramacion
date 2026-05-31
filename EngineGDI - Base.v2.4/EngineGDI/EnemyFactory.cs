@@ -7,7 +7,7 @@ namespace EngineGDI
             switch (type)
             {
                 case EnemyType.Chaser:
-                    return new ChaserEnemy("BasicEnemy.png",spawnPos,player);
+                    return new ChaserEnemy("ChaserEnemy.png",spawnPos,player);
 
                 case EnemyType.Bouncing:
                     return new BouncingEnemy("BouncingEnemy.png",spawnPos);
@@ -16,7 +16,7 @@ namespace EngineGDI
                     return new SpiralEnemy("SpiralEnemy.png",spawnPos);
 
                 case EnemyType.Boss:
-                    return new BossEnemy("BasicEnemy.png",spawnPos,player);
+                    return new BossEnemy("BossEnemy.png", spawnPos,player);
             }
 
             return null;

@@ -10,6 +10,7 @@ namespace EngineGDI
         private static Random rng = new Random();
 
         public override int PointsOnKill => 3;
+        public override Vector2 RenderScale => new Vector2(3f, 3f);
 
         public BouncingEnemy(string sprite, Vector2 startPos)
             : base(sprite, startPos)
