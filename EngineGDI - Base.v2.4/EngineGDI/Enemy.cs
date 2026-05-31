@@ -20,6 +20,10 @@ namespace EngineGDI
         
         public virtual Vector2 RenderScale => size;
 
+        //events
+        public event Action<float>OnPlayerHit;
+        public event Action<Vector2>OnSpawnRequested;
+
         public Enemy(string sprite, Vector2 startPos)
         {
             this.sprite = sprite;
@@ -28,10 +32,25 @@ namespace EngineGDI
 
         public abstract void Update(float deltaTime);
 
+        protected void NotifyPlayerHit(float damageTime)
+        {
+            OnPlayerHit?.Invoke(damageTime);
+        }
+
+        protected void RequestSpawn(Vector2 spawnPos)
+        {
+            OnSpawnRequested?.Invoke(spawnPos);
+        }
+
         protected virtual void CheckIfOutOfScreen()
         {
             if (pos.Y > Program.SCREEN_HEIGHT)
                 Deactivate();
+        }
+
+        public virtual void TakeDamage(int damage)
+        {
+            Deactivate();
         }
 
         public virtual void Deactivate()

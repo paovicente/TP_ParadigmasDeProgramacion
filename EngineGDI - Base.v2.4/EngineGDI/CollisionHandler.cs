@@ -24,9 +24,16 @@ namespace EngineGDI
                         bullet.Position, bullet.Size,
                         enemy.Pos, enemy.Size))
                     {
-                        pointsEarned += enemy.PointsOnKill;
-                        bullets.RemoveAt(j);
-                        enemies.RemoveAt(i);
+                        enemy.TakeDamage(1);
+                        bullet.Deactivate();
+
+                        //if enemy died
+                        if (!enemy.IsActive)
+                        {
+                            pointsEarned += enemy.PointsOnKill;
+
+                            enemies.RemoveAt(i);
+                        }
                         break;
                     }
                 }

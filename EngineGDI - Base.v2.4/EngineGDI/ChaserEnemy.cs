@@ -5,7 +5,8 @@ namespace EngineGDI
         private Movement movement;
         private Player player;
 
-        public override int PointsOnKill => 3;
+        public override int PointsOnKill => 4;
+        public override Vector2 RenderScale => new Vector2(2f, 2f);
 
         public ChaserEnemy(string sprite, Vector2 startPos, Player player)
             : base(sprite, startPos)
@@ -37,6 +38,23 @@ namespace EngineGDI
             }
 
             movement.Move(ref pos, direction, deltaTime);
+
+            CheckPlayerCollision();
+        }
+
+        private void CheckPlayerCollision()
+        {
+            float distance =
+                (player.Pos - pos).Magnitude();
+
+            float hitDistance = 25f;
+
+            if (distance <= hitDistance)
+            {
+                NotifyPlayerHit(5f);
+
+                Deactivate();
+            }
         }
     }
 }

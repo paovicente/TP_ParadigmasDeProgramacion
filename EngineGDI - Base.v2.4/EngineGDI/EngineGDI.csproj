@@ -57,6 +57,7 @@
     <Compile Include="EnemyType.cs" />
     <Compile Include="GameManager.cs" />
     <Compile Include="IPoolable.cs" />
+    <Compile Include="LevelData.cs" />
     <Compile Include="Movement.cs" />
     <Compile Include="EnemySpawner.cs" />
     <Compile Include="FinalMenu.cs" />
@@ -98,10 +99,16 @@
     <Content Include="BasicEnemy.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="BossEnemy.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="BouncingEnemy.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Bullet.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ChaserEnemy.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="PlayerFrame2.png">

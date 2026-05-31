@@ -6,8 +6,8 @@ namespace EngineGDI
 {
     public class GameManager
     {
-        public const float SessionDuration = 30f;
-        public const int PointsToWin = 30;
+        public float sessionDuration;
+        public int pointsToWin;
 
         private static GameManager instance;
 
@@ -31,10 +31,52 @@ namespace EngineGDI
         private float sessionTimeLeft;
         private int sessionScore;
 
-        private List<EnemyType> level1Enemies = new List<EnemyType>
+        //events
+        public event Action<int> OnLevelCompleted; //here is Action int because we want to send next level number
+        public event Action OnGameOver;
+
+        //levels
+        private int currentLevel;
+        public int CurrentLevel => currentLevel;
+
+        private Dictionary<int, LevelData> levels = new Dictionary<int, LevelData>
         {
-            EnemyType.Bouncing,
-            EnemyType.Spiral
+            {
+                1, new LevelData(30f,
+                    20,
+                    new List<EnemyType>
+                    {
+                        EnemyType.Bouncing,
+                        EnemyType.Spiral
+                    }
+                )
+            },
+
+            {
+                2,
+                new LevelData(
+                    50f,
+                    40,
+                    new List<EnemyType>
+                    {
+                        EnemyType.Bouncing,
+                        EnemyType.Spiral,
+                        EnemyType.Chaser
+                    }
+                )
+            },
+
+            {
+                3,
+                new LevelData(
+                    80f,
+                    70,
+                    new List<EnemyType>
+                    {
+                        EnemyType.Boss
+                    }
+                )
+            }
         };
 
         private GameManager()
@@ -43,14 +85,7 @@ namespace EngineGDI
 
         public void Initialize()
         {
-            SessionEnded = false;
-            SessionVictory = false;
-            sessionTimeLeft = SessionDuration;
-            sessionScore = 0;
-
-            Player = new Player("PlayerFrame1.png", new Vector2(40, 490));
-
-            EnemySpawner = new EnemySpawner(2f, Player, level1Enemies);
+            StartLevel(1);
         }
 
         public void Update(float deltaTime, int screenWidth)
@@ -72,18 +107,56 @@ namespace EngineGDI
             );
             sessionScore += pointsThisFrame;
 
-            if (sessionScore >= PointsToWin)
+            if (sessionScore >= pointsToWin)
             {
-                SessionVictory = true;
-                SessionEnded = true;
+                if (currentLevel < 3)
+                {
+                    OnLevelCompleted?.Invoke(currentLevel + 1);
+                }
+                else
+                {
+                    SessionVictory = true;
+                    SessionEnded = true;
+                }
                 return;
             }
 
             if (sessionTimeLeft <= 0f)
             {
-                SessionVictory = false;
                 SessionEnded = true;
+
+                OnGameOver?.Invoke();
             }
+        }
+
+        public void StartLevel(int level)
+        {
+            currentLevel = level;
+
+            LevelData levelData = levels[level];
+
+            SessionEnded = false;
+            SessionVictory = false;
+
+            sessionDuration = levelData.Duration;
+
+            sessionTimeLeft = levelData.Duration;
+
+            pointsToWin = levelData.PointsToWin;
+
+            sessionScore = 0;
+
+            Player = new Player("PlayerFrame1.png", new Vector2(40, 490));
+
+            EnemySpawner = new EnemySpawner(2f, Player, levelData.Enemies);
+        }
+
+        public void RemoveTime(float seconds)
+        {
+            sessionTimeLeft -= seconds;
+
+            if (sessionTimeLeft < 0f)
+                sessionTimeLeft = 0f;
         }
 
         public void Render()
@@ -91,7 +164,6 @@ namespace EngineGDI
             Engine.Draw("fondo1.png", 0, 0);
 
             const float playerRenderScale = 3.0f;
-            const float enemyRenderScale = 3.0f;
             const float projectileRenderScale = 0.50f;
 
             Engine.Draw(Player.Sprite, Player.Pos.X, Player.Pos.Y, playerRenderScale, playerRenderScale, 0, .5f, .5f);
@@ -113,17 +185,18 @@ namespace EngineGDI
 
             foreach (var e in EnemySpawner.Enemies)
             {
-                Vector2 renderScale = e.RenderScale;
-                if (e is SpiralEnemy || e is BouncingEnemy)
-                    renderScale = new Vector2(enemyRenderScale, enemyRenderScale);
+                if (!e.IsActive)
+                    continue;
 
                 Engine.Draw(
                     e.Sprite,
                     e.Pos.X,
                     e.Pos.Y,
-                    renderScale.X, renderScale.Y,
+                    e.RenderScale.X,
+                    e.RenderScale.Y,
                     0,
-                    0.5f, 0.5f
+                    0.5f,
+                    0.5f
                 );
             }
 
@@ -142,7 +215,7 @@ namespace EngineGDI
                     "Consolas");
 
                 Engine.DrawText(
-                    "Points: " + sessionScore + " / " + PointsToWin,
+                    "Points: " + sessionScore + " / " + pointsToWin,
                     Program.SCREEN_WIDTH - 320f,
                     12f,
                     22f,
