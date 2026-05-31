@@ -51,30 +51,9 @@ namespace EngineGDI
 
             EnemyType type = availableEnemies[rng.Next(availableEnemies.Count)];
 
-            Enemy enemy = CreateEnemy(type, spawnPos);
+            Enemy enemy = EnemyFactory.CreateEnemy(type, spawnPos,player);
 
             enemies.Add(enemy);
-        }
-
-        private Enemy CreateEnemy(EnemyType type, Vector2 pos)
-        {
-            switch (type)
-            {
-                case EnemyType.Bouncing:
-                    return new BouncingEnemy("BouncingEnemy.png", pos);
-
-                case EnemyType.Spiral:
-                    return new SpiralEnemy("SpiralEnemy.png", pos);
-
-                case EnemyType.Chaser:
-                    return new ChaserEnemy("BasicEnemy.png", pos, player);
-
-                case EnemyType.Boss:
-                    return new BossEnemy("BasicEnemy.png", pos, player);
-
-                default:
-                    throw new Exception("Enemy type not supported");
-            }
         }
     }
 }
