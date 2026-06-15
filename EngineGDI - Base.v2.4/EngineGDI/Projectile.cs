@@ -17,6 +17,8 @@ namespace EngineGDI
         public Renderer Renderer => renderer;
         public bool IsActive => isActive;
 
+        public Vector2 CollisionSize => new Vector2(16f, 16f);
+
         public Projectile(Transform transform, Renderer renderer, float speed)
         {
             this.transform = transform;

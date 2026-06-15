@@ -16,24 +16,28 @@ namespace EngineGDI
             {
                 var enemy = enemies[i];
 
+                if (!enemy.IsActive)
+                    continue;
+
                 for (int j = bullets.Count - 1; j >= 0; j--)
                 {
                     var bullet = bullets[j];
 
-                    if (Collision.IsBoxColliding(
-                        bullet.Transform.Position, bullet.Transform.Scale,
-                        enemy.Pos, enemy.Size))
+                    if (!bullet.IsActive)
+                        continue;
+
+                    if (Collision.IsBoxColliding(bullet.Transform.Position,bullet.CollisionSize,enemy.Transform.Position,enemy.CollisionSize))
                     {
                         enemy.TakeDamage(1);
                         bullet.Deactivate();
 
-                        //if enemy died
                         if (!enemy.IsActive)
                         {
                             pointsEarned += enemy.PointsOnKill;
 
-                            enemies.RemoveAt(i);
+                            //enemies.RemoveAt(i);
                         }
+
                         break;
                     }
                 }

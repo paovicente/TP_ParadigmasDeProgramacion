@@ -69,8 +69,7 @@ namespace EngineGDI
             if (Engine.OnKeyDown(Keys.Space))
             {
                 //shoot
-                shooter.Shoot(transform.Position +
-    new Vector2(0f, -40f));
+                shooter.Shoot(transform.Position + new Vector2(20f, -10f));
             }
 
         }

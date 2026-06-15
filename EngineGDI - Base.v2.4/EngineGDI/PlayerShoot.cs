@@ -20,7 +20,7 @@ namespace EngineGDI
         private Projectile CreateProjectile()
         {
             Transform transform = new Transform();
-            transform.Scale = new Vector2(0.5f, 0.5f);
+            transform.Scale = new Vector2(0.5f,0.5f);//0.5,0.5
 
             Renderer renderer = new Renderer("Bullet.png", transform);
 

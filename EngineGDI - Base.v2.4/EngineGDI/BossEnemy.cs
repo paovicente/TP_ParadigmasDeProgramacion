@@ -12,7 +12,8 @@ namespace EngineGDI
         private static Random rng = new Random();
 
         public override int PointsOnKill => 6;
-        public override Vector2 RenderScale => new Vector2(1.5f, 1.5f);
+        public override Vector2 RenderScale => new Vector2(0.5f, 0.5f);
+        public override Vector2 CollisionSize => new Vector2(64f, 64f);
 
         public BossEnemy(string sprite, Vector2 startPos, Player player)
             :base(sprite, startPos)
@@ -20,6 +21,7 @@ namespace EngineGDI
             this.player = player;
             health = 4;
 
+            Size = new Vector2(2f, 2f);
             movement = new Movement(50f);
 
             PickRandomDirection();

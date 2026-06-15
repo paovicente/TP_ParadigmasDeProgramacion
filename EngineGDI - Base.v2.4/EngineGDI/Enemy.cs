@@ -5,35 +5,55 @@ namespace EngineGDI
 {
     public abstract class Enemy
     {
-        protected Transform transform = new Transform();
+        protected Transform transform;
         protected Renderer renderer;
         protected bool isActive = true;
 
+        public Transform Transform => transform;
+        public Renderer Renderer => renderer;
+
         public Vector2 Pos => transform.Position;
+
         public Vector2 Size
         {
             get => transform.Scale;
-            set => transform.Scale = new Vector2(0.05f, 0.05f);
+            set => transform.Scale = value;
         }
+
+        public virtual Vector2 CollisionSize => new Vector2(32f, 32f);
+
         public string Sprite => renderer.TexturePath;
         public bool IsActive => isActive;
 
-        /// <summary>Points earned by the player when he kills this enemy.</summary>
         public virtual int PointsOnKill => 0;
-        
+
         public virtual Vector2 RenderScale => Size;
 
-        //events
-        public event Action<float>OnPlayerHit;
-        public event Action<Vector2>OnSpawnRequested;
+        public event Action<float> OnPlayerHit;
+        public event Action<Vector2> OnSpawnRequested;
 
         public Enemy(string sprite, Vector2 startPos)
         {
-            renderer.TexturePath = sprite;
+            transform = new Transform();
+
             transform.Position = startPos;
+            transform.Scale = new Vector2(2f, 2f);
+
+            renderer = new Renderer(sprite, transform);
+
+            renderer.OffsetX = 0.5f;
+            renderer.OffsetY = 0.5f;
         }
 
         public abstract void Update(float deltaTime);
+
+        public virtual void Render()
+        {
+            if (!isActive)
+                return;
+
+            renderer.Render();
+        }
 
         protected void NotifyPlayerHit(float damageTime)
         {

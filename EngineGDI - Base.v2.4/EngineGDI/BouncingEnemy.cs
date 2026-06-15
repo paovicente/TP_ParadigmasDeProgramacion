@@ -15,7 +15,7 @@ namespace EngineGDI
         public BouncingEnemy(string sprite, Vector2 startPos)
             : base(sprite, startPos)
         {
-            Size = new Vector2(0.01f, 0.01f);
+            Size = new Vector2(3f, 3f); //0.01,0.01
 
             movement = new Movement(140f);
             PickRandomDirection();

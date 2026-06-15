@@ -103,13 +103,13 @@ namespace EngineGDI
 
             Player.Update();
 
-            //EnemySpawner.Update(deltaTime, screenWidth);
+            EnemySpawner.Update(deltaTime, screenWidth);
 
-            /* int pointsThisFrame = CollisionSystem.HandleCollisions(
+            int pointsThisFrame = CollisionSystem.HandleCollisions(
                 EnemySpawner.Enemies,
                 Player.Shooter.Projectiles
-            );*/
-            //sessionScore += pointsThisFrame;
+            );
+            sessionScore += pointsThisFrame;
 
             if (sessionScore >= pointsToWin)
             {
@@ -154,7 +154,7 @@ namespace EngineGDI
 
             Player = new Player();
 
-            EnemySpawner = new EnemySpawner(2f, Player, levelData.Enemies);
+            EnemySpawner = new EnemySpawner(1.5f, Player, levelData.Enemies);
         }
 
         public void RemoveTime(float seconds)
@@ -174,19 +174,7 @@ namespace EngineGDI
 
             foreach (var e in EnemySpawner.Enemies)
             {
-                if (!e.IsActive)
-                    continue;
-
-                Engine.Draw(
-                    e.Sprite,
-                    e.Pos.X,
-                    e.Pos.Y,
-                    e.RenderScale.X,
-                    e.RenderScale.Y,
-                    0,
-                    0.5f,
-                    0.5f
-                );
+                e.Render();
             }
 
             if (!SessionEnded)

@@ -12,6 +12,7 @@ namespace EngineGDI
             : base(sprite, startPos)
         {
             this.player = player;
+            Size = new Vector2(2f, 2f);
             movement = new Movement(150f);
         }
 
