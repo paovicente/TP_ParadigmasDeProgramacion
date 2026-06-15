@@ -12,7 +12,7 @@ namespace EngineGDI
         private readonly Transform transform;
         private readonly Renderer renderer;
 
-        private float speed = 150f;
+        private float speed = 160f;
         private PlayerShoot shooter; // composition
         private Movement movement;
 
