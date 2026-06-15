@@ -104,9 +104,10 @@ namespace EngineGDI
             Player.Update();
 
             EnemySpawner.Update(deltaTime, screenWidth);
+            List<IDamageableByPlayer> damageable = new List<IDamageableByPlayer>();
 
             int pointsThisFrame = CollisionSystem.HandleCollisions(
-                EnemySpawner.Enemies,
+                damageable,
                 Player.Shooter.Projectiles
             );
             sessionScore += pointsThisFrame;
@@ -167,16 +168,23 @@ namespace EngineGDI
 
         public void Render()
         {
-            //bgRenderer = new Renderer("fondo1.png", new Transform());
+
             bgRenderer.Render();
-            
+            /*
+            List<IRenderable> renderables = new List<IRenderable>();
+
+            foreach (IRenderable renderable in renderables)
+            {
+                renderable.Render();
+            }
+            */
             Player.Render();
 
             foreach (var e in EnemySpawner.Enemies)
             {
                 e.Render();
             }
-
+            /**/
             if (!SessionEnded)
             {
                 int secondsLeft = (int)Math.Ceiling(sessionTimeLeft);

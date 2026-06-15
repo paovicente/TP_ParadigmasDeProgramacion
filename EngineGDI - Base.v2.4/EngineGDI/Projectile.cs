@@ -2,7 +2,7 @@ using System;
 
 namespace EngineGDI
 {
-    public class Projectile: IPoolable
+    public class Projectile: IPoolable, IRenderable
     {
         private readonly Transform transform;
         private readonly Renderer renderer;

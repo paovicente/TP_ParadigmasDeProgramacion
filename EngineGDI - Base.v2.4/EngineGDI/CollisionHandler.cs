@@ -8,7 +8,7 @@ namespace EngineGDI
     /// </summary>
     public static class CollisionSystem
     {
-        public static int HandleCollisions(List<Enemy> enemies, List<Projectile> bullets)
+        public static int HandleCollisions(List<IDamageableByPlayer> enemies, List<Projectile> bullets)
         {
             int pointsEarned = 0;
 

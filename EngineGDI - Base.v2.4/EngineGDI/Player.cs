@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace EngineGDI
 {
-    public class Player
+    public class Player : IRenderable
     {
         private readonly Transform transform;
         private readonly Renderer renderer;
