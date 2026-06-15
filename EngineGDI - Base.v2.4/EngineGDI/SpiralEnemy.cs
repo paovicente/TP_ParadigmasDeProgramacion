@@ -13,7 +13,7 @@ namespace EngineGDI
         public SpiralEnemy(string sprite, Vector2 startPos)
             : base(sprite, startPos)
         {
-            Size = new Vector2(0.04f, 0.04f);
+            Size = new Vector2(3f, 3f);
 
             center = startPos;
             radius = 1f;
