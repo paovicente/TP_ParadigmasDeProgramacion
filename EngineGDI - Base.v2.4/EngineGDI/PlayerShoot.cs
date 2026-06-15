@@ -19,7 +19,15 @@ namespace EngineGDI
 
         private Projectile CreateProjectile()
         {
-            return new Projectile(new Renderer("Bullet.png", new Transform()),250f);
+            Transform transform = new Transform();
+            transform.Scale = new Vector2(0.5f, 0.5f);
+
+            Renderer renderer = new Renderer("Bullet.png", transform);
+
+            renderer.OffsetX = 0.5f;
+            renderer.OffsetY = 0.5f;
+
+            return new Projectile(transform, renderer, 250f);
         }
 
         public void Shoot(Vector2 pos)
@@ -36,7 +44,23 @@ namespace EngineGDI
         {
             foreach (var proj in projectilePool.Objects)
             {
+                if (proj == null)
+                    continue;
+
                 proj.Update(deltaTime);
+            }
+        }
+
+        public void Render()
+        {
+
+            foreach (var proj in projectilePool.Objects)
+            {
+                if (proj == null)
+                    continue;
+
+                if (proj.IsActive)
+                    proj.Render();
             }
         }
     }

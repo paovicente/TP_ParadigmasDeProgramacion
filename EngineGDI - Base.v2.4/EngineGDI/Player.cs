@@ -26,8 +26,12 @@ namespace EngineGDI
         public Movement Movement => movement;
         public Animation Animation => animation;
 
-        public Player(Transform transform)
+        public Player()
         {
+            transform = new Transform();
+            transform.Position = new Vector2(40, 450);
+            transform.Scale = new Vector2(3f, 3f);
+
             string[] frames =
             {
                 "PlayerFrame1.png",
@@ -37,7 +41,7 @@ namespace EngineGDI
             };
 
             renderer = new Renderer("PlayerFrame1.png", transform);
-            animation = new Animation(renderer, frames, 0.25f);
+            animation = new Animation(renderer, frames, 0.25f);          
 
             shooter = new PlayerShoot();
             movement = new Movement(speed);
@@ -65,9 +69,16 @@ namespace EngineGDI
             if (Engine.OnKeyDown(Keys.Space))
             {
                 //shoot
-                shooter.Shoot(transform.Position);
+                shooter.Shoot(transform.Position +
+    new Vector2(0f, -40f));
             }
 
+        }
+
+        public void Render()
+        {
+            renderer.Render();
+            shooter.Render();
         }
     }
 }

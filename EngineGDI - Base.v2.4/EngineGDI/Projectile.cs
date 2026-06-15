@@ -1,3 +1,5 @@
+using System;
+
 namespace EngineGDI
 {
     public class Projectile: IPoolable
@@ -15,9 +17,11 @@ namespace EngineGDI
         public Renderer Renderer => renderer;
         public bool IsActive => isActive;
 
-        public Projectile(Renderer renderer, float speed)
+        public Projectile(Transform transform, Renderer renderer, float speed)
         {
-            renderer.TexturePath = sprite;
+            this.transform = transform;
+            this.renderer = renderer;
+
             this.speed = speed;
             isActive = false;
         }
@@ -44,6 +48,13 @@ namespace EngineGDI
         public void Deactivate()
         {
             isActive = false;
+        }
+
+        public void Render()
+        {
+            if (!isActive) return;
+
+            renderer.Render();
         }
     }
 }
