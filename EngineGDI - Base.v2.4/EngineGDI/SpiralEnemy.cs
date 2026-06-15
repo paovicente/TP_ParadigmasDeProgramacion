@@ -13,7 +13,7 @@ namespace EngineGDI
         public SpiralEnemy(string sprite, Vector2 startPos)
             : base(sprite, startPos)
         {
-            size = new Vector2(0.04f, 0.04f);
+            Size = new Vector2(0.04f, 0.04f);
 
             center = startPos;
             radius = 1f;
@@ -26,9 +26,11 @@ namespace EngineGDI
             radius += 20f * deltaTime;
 
             center.Y += 50f * deltaTime;
-
-            pos.X = center.X + (float)Math.Cos(angle) * radius;
-            pos.Y = center.Y + (float)Math.Sin(angle) * radius;
+            transform.Position = new Vector2
+                (
+                center.X + (float)Math.Cos(angle) * radius,
+                center.Y + (float)Math.Sin(angle) * radius
+                );
 
             CheckIfOutOfScreen();
         }
@@ -38,10 +40,10 @@ namespace EngineGDI
             float margin = 50f;
 
             if (
-                pos.X < -margin ||
-                pos.X > Program.SCREEN_WIDTH + margin ||
-                pos.Y < -margin ||
-                pos.Y > Program.SCREEN_HEIGHT + margin
+                transform.Position.X < -margin ||
+                transform.Position.X > Program.SCREEN_WIDTH + margin ||
+                transform.Position.Y < -margin ||
+                transform.Position.Y > Program.SCREEN_HEIGHT + margin
             )
             {
                 Deactivate();

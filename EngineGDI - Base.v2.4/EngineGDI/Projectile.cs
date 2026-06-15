@@ -1,30 +1,36 @@
+using System;
+
 namespace EngineGDI
 {
     public class Projectile: IPoolable
     {
-        private Vector2 position;
+        private readonly Transform transform;
+        private readonly Renderer renderer;
+
         private Vector2 direction;
-        private Vector2 size = new Vector2(32, 32);
         private float speed;
         private bool isActive;
         private string sprite;
 
         //encapsulation
-        public Vector2 Position => position;
-        public Vector2 Size => size;
+        public Transform Transform => transform;
+        public Renderer Renderer => renderer;
         public bool IsActive => isActive;
-        public string Sprite => sprite;
 
-        public Projectile(string sprite, float speed)
+        public Vector2 CollisionSize => new Vector2(16f, 16f);
+
+        public Projectile(Transform transform, Renderer renderer, float speed)
         {
-            this.sprite = sprite;
+            this.transform = transform;
+            this.renderer = renderer;
+
             this.speed = speed;
             isActive = false;
         }
 
         public void Activate(Vector2 startPosition, Vector2 dir)
         {
-            position = startPosition;
+            transform.Position = startPosition;
             direction = dir.Normalize();
             isActive = true;
         }
@@ -33,9 +39,9 @@ namespace EngineGDI
         {
             if (!isActive) return;
 
-            position += direction * speed * deltaTime;
+            transform.Position += direction * speed * deltaTime;
 
-            if (position.Y < 0 || position.Y > Program.SCREEN_HEIGHT || position.X < 0 || position.X > Program.SCREEN_WIDTH)
+            if (transform.Position.Y < 0 || transform.Position.Y > Program.SCREEN_HEIGHT || transform.Position.X < 0 || transform.Position.X > Program.SCREEN_WIDTH)
             {
                 Deactivate();
             }
@@ -44,6 +50,13 @@ namespace EngineGDI
         public void Deactivate()
         {
             isActive = false;
+        }
+
+        public void Render()
+        {
+            if (!isActive) return;
+
+            renderer.Render();
         }
     }
 }

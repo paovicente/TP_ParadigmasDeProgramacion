@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
+using System.Security.Cryptography.X509Certificates;
+using System.Windows.Forms.VisualStyles;
 
 namespace EngineGDI
 {
@@ -30,6 +33,7 @@ namespace EngineGDI
 
         private float sessionTimeLeft;
         private int sessionScore;
+        private Renderer bgRenderer;
 
         //events
         public event Action<int> OnLevelCompleted; //here is Action int because we want to send next level number
@@ -131,6 +135,8 @@ namespace EngineGDI
 
         public void StartLevel(int level)
         {
+            bgRenderer = new Renderer("fondo1.png",new Transform());
+
             currentLevel = level;
 
             LevelData levelData = levels[level];
@@ -146,9 +152,9 @@ namespace EngineGDI
 
             sessionScore = 0;
 
-            Player = new Player("PlayerFrame1.png", new Vector2(40, 490));
+            Player = new Player();
 
-            EnemySpawner = new EnemySpawner(2f, Player, levelData.Enemies);
+            EnemySpawner = new EnemySpawner(1.5f, Player, levelData.Enemies);
         }
 
         public void RemoveTime(float seconds)
@@ -161,43 +167,14 @@ namespace EngineGDI
 
         public void Render()
         {
-            Engine.Draw("fondo1.png", 0, 0);
-
-            const float playerRenderScale = 3.0f;
-            const float projectileRenderScale = 0.50f;
-
-            Engine.Draw(Player.Sprite, Player.Pos.X, Player.Pos.Y, playerRenderScale, playerRenderScale, 0, .5f, .5f);
-
-            foreach (var proj in Player.Shooter.Projectiles)
-            {
-                if (proj.IsActive)
-                {
-                    Engine.Draw(
-                        proj.Sprite,
-                        proj.Position.X,
-                        proj.Position.Y,
-                        projectileRenderScale, projectileRenderScale,
-                        0,
-                        0.5f, 0.5f
-                    );
-                }
-            }
+            //bgRenderer = new Renderer("fondo1.png", new Transform());
+            bgRenderer.Render();
+            
+            Player.Render();
 
             foreach (var e in EnemySpawner.Enemies)
             {
-                if (!e.IsActive)
-                    continue;
-
-                Engine.Draw(
-                    e.Sprite,
-                    e.Pos.X,
-                    e.Pos.Y,
-                    e.RenderScale.X,
-                    e.RenderScale.Y,
-                    0,
-                    0.5f,
-                    0.5f
-                );
+                e.Render();
             }
 
             if (!SessionEnded)

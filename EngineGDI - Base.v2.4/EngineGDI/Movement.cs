@@ -9,12 +9,9 @@ namespace EngineGDI
             Speed = speed;
         }
 
-        /// <summary>
-        /// The position is passed by reference so it gets updated directly.
-        /// </summary>
-        public void Move(ref Vector2 position, Vector2 direction, float deltaTime)
+        public void Move(Transform transform, Vector2 direction, float deltaTime)
         {
-            position += direction * Speed * deltaTime;
+            transform.Position += direction * Speed * deltaTime;
         }
     }
 }

@@ -12,7 +12,8 @@ namespace EngineGDI
         private static Random rng = new Random();
 
         public override int PointsOnKill => 6;
-        public override Vector2 RenderScale => new Vector2(1.5f, 1.5f);
+        public override Vector2 RenderScale => new Vector2(0.5f, 0.5f);
+        public override Vector2 CollisionSize => new Vector2(64f, 64f);
 
         public BossEnemy(string sprite, Vector2 startPos, Player player)
             :base(sprite, startPos)
@@ -20,6 +21,7 @@ namespace EngineGDI
             this.player = player;
             health = 4;
 
+            Size = new Vector2(2f, 2f);
             movement = new Movement(50f);
 
             PickRandomDirection();
@@ -27,7 +29,7 @@ namespace EngineGDI
 
         public override void Update(float deltaTime)
         {
-            movement.Move(ref pos, direction, deltaTime);
+            movement.Move(transform, direction, deltaTime);
 
             CheckPlayerCollision();
 
@@ -43,12 +45,12 @@ namespace EngineGDI
 
         private void KeepInsideScreen()
         {
-            if (pos.X < 0 || pos.X > Program.SCREEN_WIDTH)
+            if (transform.Position.X < 0 || transform.Position.X > Program.SCREEN_WIDTH)
             {
                 direction.X *= -1;
             }
 
-            if (pos.Y < 0 || pos.Y > Program.SCREEN_HEIGHT)
+            if (transform.Position.Y < 0 || transform.Position.Y > Program.SCREEN_HEIGHT)
             {
                 direction.Y *= -1;
             }
@@ -68,13 +70,13 @@ namespace EngineGDI
         {
             isActive = false;
 
-            RequestSpawn(pos);
+            RequestSpawn(transform.Position);
         }
 
         private void CheckPlayerCollision()
         {
             float distance =
-                (player.Pos - pos).Magnitude();
+                (player.Transform.Position - transform.Position).Magnitude();
 
             float hitDistance = 25f;
 

@@ -15,7 +15,7 @@ namespace EngineGDI
         public BouncingEnemy(string sprite, Vector2 startPos)
             : base(sprite, startPos)
         {
-            this.size = new Vector2(0.01f, 0.01f);
+            Size = new Vector2(3f, 3f); //0.01,0.01
 
             movement = new Movement(140f);
             PickRandomDirection();
@@ -23,7 +23,7 @@ namespace EngineGDI
 
         public override void Update(float deltaTime)
         {
-            movement.Move(ref pos, direction, deltaTime);
+            movement.Move(transform, direction, deltaTime);
             KeepInsideScreen();
             CheckIfOutOfScreen();
         }
@@ -38,10 +38,10 @@ namespace EngineGDI
 
         private void KeepInsideScreen()
         {
-            if (pos.X < 0 || pos.X > Program.SCREEN_WIDTH) 
+            if (transform.Position.X < 0 || transform.Position.X > Program.SCREEN_WIDTH) 
                 direction.X *= -1;
 
-            if (pos.Y < 0 || pos.Y > Program.SCREEN_HEIGHT) 
+            if (transform.Position.Y < 0 || transform.Position.Y > Program.SCREEN_HEIGHT) 
                 direction.Y *= -1;
         }
     }
