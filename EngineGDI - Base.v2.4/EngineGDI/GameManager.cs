@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
+using System.Security.Cryptography.X509Certificates;
+using System.Windows.Forms.VisualStyles;
 
 namespace EngineGDI
 {
@@ -128,6 +131,12 @@ namespace EngineGDI
                 OnGameOver?.Invoke();
             }
         }
+        
+        private Renderer bgRenderer;
+        private Transform playerTransform;
+        private Renderer playerRenderer;
+        private Transform projectileTransform;
+        private Renderer projectileRenderer;
 
         public void StartLevel(int level)
         {
@@ -146,7 +155,10 @@ namespace EngineGDI
 
             sessionScore = 0;
 
-            Player = new Player("PlayerFrame1.png", new Vector2(40, 490));
+            playerTransform = new Transform();
+            playerTransform.Position = new Vector2(40, 490);
+            playerTransform.Scale = new Vector2(3.0f, 3.0f);
+            Player = new Player(playerTransform);
 
             EnemySpawner = new EnemySpawner(2f, Player, levelData.Enemies);
         }
@@ -161,21 +173,22 @@ namespace EngineGDI
 
         public void Render()
         {
-            Engine.Draw("fondo1.png", 0, 0);
+            bgRenderer = new Renderer("fondo1.png", new Transform());
+            bgRenderer.Render();
+            playerRenderer = new Renderer(Player.Sprite, playerTransform);
+            playerRenderer.Render();
 
-            const float playerRenderScale = 3.0f;
+
             const float projectileRenderScale = 0.50f;
-
-            Engine.Draw(Player.Sprite, Player.Pos.X, Player.Pos.Y, playerRenderScale, playerRenderScale, 0, .5f, .5f);
 
             foreach (var proj in Player.Shooter.Projectiles)
             {
                 if (proj.IsActive)
                 {
                     Engine.Draw(
-                        proj.Sprite,
-                        proj.Position.X,
-                        proj.Position.Y,
+                        proj.Renderer.TexturePath,
+                        proj.Transform.Position.X,
+                        proj.Transform.Position.Y,
                         projectileRenderScale, projectileRenderScale,
                         0,
                         0.5f, 0.5f

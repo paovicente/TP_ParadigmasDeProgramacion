@@ -17,7 +17,7 @@ namespace EngineGDI
 
         public override void Update(float deltaTime)
         {
-            Vector2 toPlayer = player.Pos - pos;
+            Vector2 toPlayer = player.Transform.Position - transform.Position;
             float mag = toPlayer.Magnitude();
 
             Vector2 direction;
@@ -37,7 +37,7 @@ namespace EngineGDI
                 }
             }
 
-            movement.Move(ref pos, direction, deltaTime);
+            movement.Move(transform, direction, deltaTime);
 
             CheckPlayerCollision();
         }
@@ -45,7 +45,7 @@ namespace EngineGDI
         private void CheckPlayerCollision()
         {
             float distance =
-                (player.Pos - pos).Magnitude();
+                (player.Transform.Position - transform.Position).Magnitude();
 
             float hitDistance = 25f;
 

@@ -5,20 +5,23 @@ namespace EngineGDI
 {
     public abstract class Enemy
     {
-        protected Vector2 pos;
-        protected Vector2 size = new Vector2(0.05f, 0.05f);
-        protected string sprite;
+        protected Transform transform = new Transform();
+        protected Renderer renderer;
         protected bool isActive = true;
 
-        public Vector2 Pos => pos;
-        public Vector2 Size => size;
-        public string Sprite => sprite;
+        public Vector2 Pos => transform.Position;
+        public Vector2 Size
+        {
+            get => transform.Scale;
+            set => transform.Scale = new Vector2(0.05f, 0.05f);
+        }
+        public string Sprite => renderer.TexturePath;
         public bool IsActive => isActive;
 
         /// <summary>Points earned by the player when he kills this enemy.</summary>
         public virtual int PointsOnKill => 0;
         
-        public virtual Vector2 RenderScale => size;
+        public virtual Vector2 RenderScale => Size;
 
         //events
         public event Action<float>OnPlayerHit;
@@ -26,8 +29,8 @@ namespace EngineGDI
 
         public Enemy(string sprite, Vector2 startPos)
         {
-            this.sprite = sprite;
-            this.pos = startPos;
+            renderer.TexturePath = sprite;
+            transform.Position = startPos;
         }
 
         public abstract void Update(float deltaTime);
@@ -44,7 +47,7 @@ namespace EngineGDI
 
         protected virtual void CheckIfOutOfScreen()
         {
-            if (pos.Y > Program.SCREEN_HEIGHT)
+            if (transform.Position.Y > Program.SCREEN_HEIGHT)
                 Deactivate();
         }
 

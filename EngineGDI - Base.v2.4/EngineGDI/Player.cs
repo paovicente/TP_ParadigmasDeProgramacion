@@ -9,28 +9,26 @@ namespace EngineGDI
 {
     public class Player
     {
-        //private
-        private Vector2 pos;
+        private readonly Transform transform;
+        private readonly Renderer renderer;
+
         private float speed = 150f;
-        private PlayerShoot shooter; //composition
+        private PlayerShoot shooter; // composition
         private Movement movement;
-        private string sprite;
 
-        private readonly string[] animationFrames;
-        private int frameIndex;
-        private float frameTimer;
-        private const float AnimationDurationSeconds = 1f; //4 frames in 1 second
+        private readonly Animation animation;
 
-        //public getters, can be read from outside the class but not write
-        public Vector2 Pos => pos;
+        public Transform Transform => transform;
+        public Renderer Renderer => renderer;
         public float Speed => speed;
-        public string Sprite => sprite;
+        public string Sprite => renderer.TexturePath;
         public PlayerShoot Shooter => shooter;
         public Movement Movement => movement;
+        public Animation Animation => animation;
 
-        public Player(string sprite, Vector2 pos)
+        public Player(Transform transform)
         {
-            animationFrames = new[]
+            string[] frames =
             {
                 "PlayerFrame1.png",
                 "PlayerFrame2.png",
@@ -38,10 +36,8 @@ namespace EngineGDI
                 "PlayerFrame4.png"
             };
 
-            frameIndex = 0;
-            frameTimer = 0f;
-            this.sprite = animationFrames[0];
-            this.pos = pos;
+            renderer = new Renderer("PlayerFrame1.png", transform);
+            animation = new Animation(renderer, frames, 0.25f);
 
             shooter = new PlayerShoot();
             movement = new Movement(speed);
@@ -50,24 +46,8 @@ namespace EngineGDI
         public void Update()
         {
             HandleInput();
-            UpdateAnimation(Program.deltaTime);
+            animation.Update(Program.deltaTime);
             shooter.Update(Program.deltaTime);
-        }
-
-        private void UpdateAnimation(float deltaTime)
-        {
-            if (animationFrames.Length == 0)
-                return;
-
-            float frameDuration = AnimationDurationSeconds / animationFrames.Length; //0.25s per frame
-            frameTimer += deltaTime;
-
-            while (frameTimer >= frameDuration)
-            {
-                frameTimer -= frameDuration;
-                frameIndex = (frameIndex + 1) % animationFrames.Length;
-                sprite = animationFrames[frameIndex];
-            }
         }
 
         private void HandleInput()
@@ -80,12 +60,12 @@ namespace EngineGDI
             if (Engine.IsKeyDown(Keys.Right) || Engine.IsKeyDown(Keys.D))
                 dir.X = 1;
 
-            movement.Move(ref pos, dir, Program.deltaTime);
+            movement.Move(transform, dir, Program.deltaTime);
 
             if (Engine.OnKeyDown(Keys.Space))
             {
                 //shoot
-                shooter.Shoot(pos);
+                shooter.Shoot(transform.Position);
             }
 
         }

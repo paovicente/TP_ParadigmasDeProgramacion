@@ -27,7 +27,7 @@ namespace EngineGDI
 
         public override void Update(float deltaTime)
         {
-            movement.Move(ref pos, direction, deltaTime);
+            movement.Move(transform, direction, deltaTime);
 
             CheckPlayerCollision();
 
@@ -43,12 +43,12 @@ namespace EngineGDI
 
         private void KeepInsideScreen()
         {
-            if (pos.X < 0 || pos.X > Program.SCREEN_WIDTH)
+            if (transform.Position.X < 0 || transform.Position.X > Program.SCREEN_WIDTH)
             {
                 direction.X *= -1;
             }
 
-            if (pos.Y < 0 || pos.Y > Program.SCREEN_HEIGHT)
+            if (transform.Position.Y < 0 || transform.Position.Y > Program.SCREEN_HEIGHT)
             {
                 direction.Y *= -1;
             }
@@ -68,13 +68,13 @@ namespace EngineGDI
         {
             isActive = false;
 
-            RequestSpawn(pos);
+            RequestSpawn(transform.Position);
         }
 
         private void CheckPlayerCollision()
         {
             float distance =
-                (player.Pos - pos).Magnitude();
+                (player.Transform.Position - transform.Position).Magnitude();
 
             float hitDistance = 25f;
 

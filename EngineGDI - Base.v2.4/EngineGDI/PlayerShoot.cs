@@ -19,7 +19,7 @@ namespace EngineGDI
 
         private Projectile CreateProjectile()
         {
-            return new Projectile("Bullet.png",250f);
+            return new Projectile(new Renderer("Bullet.png", new Transform()),250f);
         }
 
         public void Shoot(Vector2 pos)

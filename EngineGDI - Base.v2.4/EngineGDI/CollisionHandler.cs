@@ -21,7 +21,7 @@ namespace EngineGDI
                     var bullet = bullets[j];
 
                     if (Collision.IsBoxColliding(
-                        bullet.Position, bullet.Size,
+                        bullet.Transform.Position, bullet.Transform.Scale,
                         enemy.Pos, enemy.Size))
                     {
                         enemy.TakeDamage(1);
