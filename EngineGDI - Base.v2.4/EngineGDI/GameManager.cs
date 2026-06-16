@@ -113,6 +113,8 @@ namespace EngineGDI
 
             if (sessionScore >= pointsToWin)
             {
+                RenderSystem.Instance.Clear();
+
                 if (currentLevel < 3)
                 {
                     OnLevelCompleted?.Invoke(currentLevel + 1);
@@ -135,6 +137,7 @@ namespace EngineGDI
 
         public void StartLevel(int level)
         {
+            
             bgRenderer = new Renderer("fondo1.png",new Transform());
 
             currentLevel = level;
@@ -167,23 +170,15 @@ namespace EngineGDI
 
         public void Render()
         {
-
             bgRenderer.Render();
-            /*
-            List<IRenderable> renderables = new List<IRenderable>();
 
-            foreach (IRenderable renderable in renderables)
-            {
-                renderable.Render();
-            }
-            */
-            Player.Render();
+            RenderSystem.Instance.RenderAll();
 
-            foreach (var e in EnemySpawner.Enemies)
-            {
-                e.Render();
-            }
-            /**/
+            DrawUI();
+        }
+
+        private void DrawUI()
+        {
             if (!SessionEnded)
             {
                 int secondsLeft = (int)Math.Ceiling(sessionTimeLeft);

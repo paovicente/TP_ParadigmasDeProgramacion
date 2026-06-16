@@ -43,6 +43,8 @@ namespace EngineGDI
 
             renderer.OffsetX = 0.5f;
             renderer.OffsetY = 0.5f;
+
+            RenderSystem.Instance.Register(this);
         }
 
         public abstract void Update(float deltaTime);
@@ -79,6 +81,7 @@ namespace EngineGDI
         public virtual void Deactivate()
         {
             isActive = false;
+            RenderSystem.Instance.Unregister(this);
         }
 
     }

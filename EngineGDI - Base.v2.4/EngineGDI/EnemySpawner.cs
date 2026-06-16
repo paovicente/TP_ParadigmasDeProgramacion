@@ -98,5 +98,10 @@ namespace EngineGDI
                 enemies.Add(minion);
             }
         }
+
+        public void ClearEnemies()
+        {
+            enemies.Clear();
+        }
     }
 }

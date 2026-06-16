@@ -45,6 +45,8 @@ namespace EngineGDI
 
             shooter = new PlayerShoot();
             movement = new Movement(speed);
+
+            RenderSystem.Instance.Register(this);
         }
 
         public void Update()
