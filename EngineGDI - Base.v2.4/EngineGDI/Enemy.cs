@@ -3,7 +3,7 @@ using System;
 
 namespace EngineGDI
 {
-    public abstract class Enemy
+    public abstract class Enemy : IRenderable, IDamageableByPlayer
     {
         protected Transform transform;
         protected Renderer renderer;
@@ -25,7 +25,7 @@ namespace EngineGDI
         public string Sprite => renderer.TexturePath;
         public bool IsActive => isActive;
 
-        public virtual int PointsOnKill => 0;
+        public abstract int PointsOnKill { get; }
 
         public virtual Vector2 RenderScale => Size;
 
@@ -43,6 +43,8 @@ namespace EngineGDI
 
             renderer.OffsetX = 0.5f;
             renderer.OffsetY = 0.5f;
+
+            RenderSystem.Instance.Register(this);
         }
 
         public abstract void Update(float deltaTime);
@@ -79,6 +81,7 @@ namespace EngineGDI
         public virtual void Deactivate()
         {
             isActive = false;
+            RenderSystem.Instance.Unregister(this);
         }
 
     }

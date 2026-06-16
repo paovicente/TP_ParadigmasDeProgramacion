@@ -29,7 +29,6 @@ C:\Users\Usuario\Documents\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v
 C:\Users\Usuario\Documents\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\EngineGDI.exe.config
 C:\Users\Usuario\Documents\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\EngineGDI.exe
 C:\Users\Usuario\Documents\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\EngineGDI.pdb
-C:\Users\Usuario\Documents\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\obj\Debug\EngineGDI.exe.config
 C:\Users\Usuario\Documents\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\fondo1.png
 C:\Users\Usuario\Documents\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\Bullet.png
 C:\Users\Usuario\Documents\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\BasicEnemy.png
@@ -90,3 +89,4 @@ C:\Users\Usuario\Documents\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v
 C:\Users\Usuario\Documents\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\BossEnemy.png
 C:\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\BossEnemy.png
 C:\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\bin\Debug\ChaserEnemy.png
+C:\Users\Usuario\Documents\GitHub\TP_ParadigmasDeProgramacion\EngineGDI - Base.v2.4\EngineGDI\obj\Debug\EngineGDI.exe.config

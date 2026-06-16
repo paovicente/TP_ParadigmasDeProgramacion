@@ -57,7 +57,9 @@
     <Compile Include="EnemyFactory.cs" />
     <Compile Include="EnemyType.cs" />
     <Compile Include="GameManager.cs" />
+    <Compile Include="IDamageableByPlayer.cs" />
     <Compile Include="IPoolable.cs" />
+    <Compile Include="IRenderable.cs" />
     <Compile Include="LevelData.cs" />
     <Compile Include="Movement.cs" />
     <Compile Include="EnemySpawner.cs" />
@@ -73,6 +75,7 @@
     <Compile Include="Projectile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderer.cs" />
+    <Compile Include="RenderSystem.cs" />
     <Compile Include="SpiralEnemy.cs" />
     <Compile Include="Transform.cs" />
     <Compile Include="Vector2.cs" />

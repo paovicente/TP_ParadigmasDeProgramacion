@@ -8,7 +8,8 @@ namespace EngineGDI
     /// </summary>
     public static class CollisionSystem
     {
-        public static int HandleCollisions(List<Enemy> enemies, List<Projectile> bullets)
+        //parameter list called enemies just for guidance, it can be a list with any class type that implements IDamageableByPlayer
+        public static int HandleCollisions<T>(List<T> enemies, List<Projectile> bullets) where T : IDamageableByPlayer
         {
             int pointsEarned = 0;
 

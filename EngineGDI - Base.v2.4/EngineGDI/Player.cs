@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace EngineGDI
 {
-    public class Player
+    public class Player : IRenderable
     {
         private readonly Transform transform;
         private readonly Renderer renderer;
@@ -45,6 +45,8 @@ namespace EngineGDI
 
             shooter = new PlayerShoot();
             movement = new Movement(speed);
+
+            RenderSystem.Instance.Register(this);
         }
 
         public void Update()

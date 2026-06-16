@@ -2,7 +2,7 @@ using System;
 
 namespace EngineGDI
 {
-    public class Projectile: IPoolable
+    public class Projectile: IPoolable, IRenderable
     {
         private readonly Transform transform;
         private readonly Renderer renderer;
@@ -26,6 +26,8 @@ namespace EngineGDI
 
             this.speed = speed;
             isActive = false;
+
+            RenderSystem.Instance.Register(this);
         }
 
         public void Activate(Vector2 startPosition, Vector2 dir)
@@ -50,6 +52,7 @@ namespace EngineGDI
         public void Deactivate()
         {
             isActive = false;
+            RenderSystem.Instance.Unregister(this);
         }
 
         public void Render()

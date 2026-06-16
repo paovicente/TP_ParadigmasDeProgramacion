@@ -104,7 +104,7 @@ namespace EngineGDI
             Player.Update();
 
             EnemySpawner.Update(deltaTime, screenWidth);
-
+            
             int pointsThisFrame = CollisionSystem.HandleCollisions(
                 EnemySpawner.Enemies,
                 Player.Shooter.Projectiles
@@ -113,6 +113,8 @@ namespace EngineGDI
 
             if (sessionScore >= pointsToWin)
             {
+                RenderSystem.Instance.Clear();
+
                 if (currentLevel < 3)
                 {
                     OnLevelCompleted?.Invoke(currentLevel + 1);
@@ -135,6 +137,7 @@ namespace EngineGDI
 
         public void StartLevel(int level)
         {
+            
             bgRenderer = new Renderer("fondo1.png",new Transform());
 
             currentLevel = level;
@@ -167,16 +170,15 @@ namespace EngineGDI
 
         public void Render()
         {
-            //bgRenderer = new Renderer("fondo1.png", new Transform());
             bgRenderer.Render();
-            
-            Player.Render();
 
-            foreach (var e in EnemySpawner.Enemies)
-            {
-                e.Render();
-            }
+            RenderSystem.Instance.RenderAll();
 
+            DrawUI();
+        }
+
+        private void DrawUI()
+        {
             if (!SessionEnded)
             {
                 int secondsLeft = (int)Math.Ceiling(sessionTimeLeft);
