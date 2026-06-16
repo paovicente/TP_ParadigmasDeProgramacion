@@ -104,10 +104,9 @@ namespace EngineGDI
             Player.Update();
 
             EnemySpawner.Update(deltaTime, screenWidth);
-            List<IDamageableByPlayer> damageable = new List<IDamageableByPlayer>();
-
+            
             int pointsThisFrame = CollisionSystem.HandleCollisions(
-                damageable,
+                EnemySpawner.Enemies,
                 Player.Shooter.Projectiles
             );
             sessionScore += pointsThisFrame;
