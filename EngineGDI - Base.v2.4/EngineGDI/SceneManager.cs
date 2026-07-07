@@ -1,3 +1,6 @@
+using System.Drawing;
+using System.Windows.Forms;
+
 namespace EngineGDI
 {
     public class SceneManager
@@ -6,12 +9,15 @@ namespace EngineGDI
         {
             InMenu,
             InGame,
-            EndScreen
+            EndScreen,
+            LevelCompleted
         }
 
         private static SceneManager instance;
         private MenuState currentState;
         private Scene currentScene;
+        private int nextLevel;
+        private int completedLevel;
 
         public static SceneManager Instance
         {
@@ -107,29 +113,34 @@ namespace EngineGDI
                     }
 
                     break;
+
+                case MenuState.LevelCompleted:
+
+                    if (Engine.OnKeyDown(Keys.Enter))
+                    {
+
+                        GameManager.Instance.ShowHUD = true;
+
+                        LevelData data = LevelDatabase.Levels[nextLevel];
+
+                        currentScene = new GameplayScene(nextLevel, data);
+                        currentScene.Initialize();
+
+                        currentState = MenuState.InGame;
+                    }
+
+                    break;
             }
         }
 
         private void HandleLevelCompleted(int nextLevel)
         {
-            if (LevelDatabase.Levels.ContainsKey(nextLevel))
-            {
-                LevelData data = LevelDatabase.Levels[nextLevel];
+            GameManager.Instance.ShowHUD = false;
 
-                currentScene = new GameplayScene(nextLevel,data);
+            completedLevel = GameManager.Instance.CurrentLevel;
+            this.nextLevel = nextLevel;
 
-                currentScene.Initialize();
-
-                currentState = MenuState.InGame;
-            }
-            else
-            {
-                currentScene = new FinalMenu(true);
-
-                currentScene.Initialize();
-
-                currentState = MenuState.EndScreen;
-            }
+            currentState = MenuState.LevelCompleted;
         }
 
         private void HandleGameOver()
@@ -144,6 +155,27 @@ namespace EngineGDI
         public void Render()
         {
             currentScene.Render();
+
+            if (currentState == MenuState.LevelCompleted)
+            {
+                DrawLevelCompletedOverlay();
+            }
         }
+
+        private void DrawLevelCompletedOverlay()
+        {
+            int imageWidth = 720;
+            int imageHeight = 480;
+
+            float x = (Program.SCREEN_WIDTH - imageWidth) / 2f;
+            float y = (Program.SCREEN_HEIGHT - imageHeight) / 2f;
+
+            Engine.Draw("fondolevelcompleted.png", x, y, 0.8f, 0.8f);
+
+            Engine.DrawText($"LEVEL {completedLevel} COMPLETED",280,220,32,Color.White,"Arial");
+
+            Engine.DrawText("PRESS ENTER TO CONTINUE",300,300,22,Color.Plum,"Arial");
+        }
+
     }
 }

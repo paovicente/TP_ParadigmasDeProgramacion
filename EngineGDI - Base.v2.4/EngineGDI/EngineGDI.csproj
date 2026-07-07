@@ -148,6 +148,9 @@
     <Content Include="fondofinalmenu.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="fondolevelcompleted.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="PlayerFrame2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
