@@ -59,18 +59,21 @@
     <Compile Include="EnemyType.cs" />
     <Compile Include="FireRatePowerUp.cs" />
     <Compile Include="GameManager.cs" />
+    <Compile Include="GameplayScene.cs" />
     <Compile Include="ICollectable.cs" />
     <Compile Include="IDamageableByPlayer.cs" />
     <Compile Include="IPoolable.cs" />
     <Compile Include="IRenderable.cs" />
     <Compile Include="LevelData.cs" />
+    <Compile Include="LevelDatabase.cs" />
+    <Compile Include="MenuAction.cs" />
+    <Compile Include="MenuScene.cs" />
     <Compile Include="Movement.cs" />
     <Compile Include="EnemySpawner.cs" />
     <Compile Include="FinalMenu.cs" />
     <Compile Include="Engine.cs" />
     <Compile Include="MainMenu.cs" />
-    <Compile Include="Menu.cs" />
-    <Compile Include="MenuManager.cs" />
+    <Compile Include="SceneManager.cs" />
     <Compile Include="ObjectPool.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayerShoot.cs" />
@@ -82,6 +85,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Renderer.cs" />
     <Compile Include="RenderSystem.cs" />
+    <Compile Include="Scene.cs" />
     <Compile Include="SpiralEnemy.cs" />
     <Compile Include="Transform.cs" />
     <Compile Include="Vector2.cs" />
@@ -132,6 +136,18 @@
     <Content Include="FireRatePowerUp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="fondo1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fondo2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fondo3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fondofinalmenu.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="PlayerFrame2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -148,9 +164,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="ButtonTest.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="fondo1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="fondomenu.png">

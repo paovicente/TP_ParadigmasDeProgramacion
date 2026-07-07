@@ -27,7 +27,7 @@ namespace EngineGDI
             Engine.Initialize("IERVA ENGINE", SCREEN_WIDTH, SCREEN_HEIGHT, false);
 
 
-            MenuManager.Instance.Initialize();
+            SceneManager.Instance.Initialize();
 
             while (Engine.IsWindowOpen)
             {
@@ -68,12 +68,12 @@ namespace EngineGDI
 
         static void Update()
         {
-            MenuManager.Instance.Update(deltaTime, SCREEN_WIDTH);
+            SceneManager.Instance.Update(deltaTime, SCREEN_WIDTH);
         }
 
         static void Render()
         {
-            MenuManager.Instance.Render();
+            SceneManager.Instance.Render();
         }
        
     }

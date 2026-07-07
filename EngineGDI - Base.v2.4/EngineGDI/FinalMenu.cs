@@ -3,18 +3,24 @@ using System.Windows.Forms;
 
 namespace EngineGDI
 {
-    /// <summary>Victory or defeat screen with a button to return to menu</summary>
-    public class FinalMenu : Menu
+    /// <summary>
+    /// Victory or defeat screen with a button to return to menu
+    /// </summary>
+    public class FinalMenu : MenuScene
     {
         private readonly bool victory;
         private int selectedIndex;
 
-        private static float MeasureTextWidthPx(string text, float fontSize, string fontName)
+        private static float MeasureTextWidthPx(
+            string text,
+            float fontSize,
+            string fontName)
         {
             using (var bmp = new Bitmap(1, 1))
             using (var g = Graphics.FromImage(bmp))
             {
                 FontFamily family = FontFamily.GenericSansSerif;
+
                 try
                 {
                     family = new FontFamily(fontName);
@@ -29,9 +35,10 @@ namespace EngineGDI
             }
         }
 
-        public FinalMenu(bool victory)
+        public FinalMenu(bool victory): base("Final Screen","fondofinalmenu.png")
         {
             this.victory = victory;
+
             buttons.Add(new Button(
                 "RETURN TO MENU",
                 MenuAction.BackToMenu,
@@ -39,6 +46,7 @@ namespace EngineGDI
                 new Vector2(512, 320),
                 new Vector2(2.6f, 3.4f)
             ));
+
             selectedIndex = 0;
         }
 
@@ -46,46 +54,40 @@ namespace EngineGDI
         {
             selectedIndex = 0;
             SelectedAction = MenuAction.None;
+
             buttons[0].SetSelected(true);
         }
 
-        public override void Update()
+        public override void Update(float deltaTime)
         {
             if (Engine.OnKeyDown(Keys.Enter))
+            {
                 SelectedAction = buttons[selectedIndex].Action;
+            }
         }
 
         public override void Render()
         {
-            Engine.Draw("fondomenu.png", 0, 0, 1f, 0.5f);
+            base.Render();
 
-            string title = victory ? "VICTORY" : "DEFEAT";
-            Color titleColor = victory ? Color.LawnGreen : Color.IndianRed;
-            float titleW = MeasureTextWidthPx(title, 36f, "Arial");
+            string title = victory? "VICTORY": "DEFEAT";
+
+            Color titleColor = victory
+                ? Color.LawnGreen
+                : Color.IndianRed;
+
+            float titleW = MeasureTextWidthPx(title,36f,"Arial");
+
             float titleX = Program.SCREEN_WIDTH / 2f - titleW / 2f;
-            Engine.DrawText(title, titleX, 120f, 36f, titleColor, "Arial");
 
-            foreach (Button button in buttons)
-            {
-                float renderScaleX = button.IsSelected ? button.Scale.X * 1.03f : button.Scale.X * 0.95f;
-                float renderScaleY = button.IsSelected ? button.Scale.Y * 1.03f : button.Scale.Y * 0.95f;
-
-                Engine.Draw(
-                    button.TexturePath,
-                    button.Position.X,
-                    button.Position.Y,
-                    renderScaleX,
-                    renderScaleY,
-                    0f,
-                    0.5f,
-                    0.5f);
-
-                Color textColor = button.IsSelected ? Color.Gold : Color.White;
-                float labelW = MeasureTextWidthPx(button.Label, 18f, "Arial");
-                float textX = button.Position.X - labelW / 2f;
-                float textY = button.Position.Y - 15f;
-                Engine.DrawText(button.Label, textX, textY, 18f, textColor, "Arial");
-            }
+            Engine.DrawText(
+                title,
+                titleX,
+                120f,
+                36f,
+                titleColor,
+                "Arial"
+            );
         }
     }
 }

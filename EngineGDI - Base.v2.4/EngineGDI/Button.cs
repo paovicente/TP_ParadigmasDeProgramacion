@@ -1,4 +1,6 @@
-﻿namespace EngineGDI
+﻿using System.Drawing;
+
+namespace EngineGDI
 {
     public class Button
     {
@@ -22,6 +24,65 @@
         public void SetSelected(bool selected)
         {
             IsSelected = selected;
+        }
+
+        public void Render()
+        {
+            float renderScaleX = IsSelected
+                ? Scale.X * 1.03f
+                : Scale.X * 0.95f;
+
+            float renderScaleY = IsSelected
+                ? Scale.Y * 1.03f
+                : Scale.Y * 0.95f;
+
+
+            Engine.Draw(
+                TexturePath,
+                Position.X,
+                Position.Y,
+                renderScaleX,
+                renderScaleY,
+                0f,
+                0.5f,
+                0.5f
+            );
+
+
+            Color textColor = IsSelected
+                ? Color.Gold
+                : Color.White;
+
+
+            float labelWidth = MeasureTextWidthPx(
+                Label,
+                18f,
+                "Arial"
+            );
+
+            float textX = Position.X - labelWidth / 2f;
+            float textY = Position.Y - 15f;
+
+            Engine.DrawText(
+                Label,
+                textX,
+                textY,
+                18f,
+                textColor,
+                "Arial"
+            );
+        }
+
+        private static float MeasureTextWidthPx(string text, float fontSize, string fontName)
+        {
+            using (var bmp = new Bitmap(1, 1))
+            using (var g = Graphics.FromImage(bmp))
+            {
+                using (var font = new Font(fontName, fontSize))
+                {
+                    return g.MeasureString(text, font).Width;
+                }
+            }
         }
     }
 }
