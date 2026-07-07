@@ -18,7 +18,7 @@ namespace UnitTest
             var startPosition = new Vector2(0, 0);
             var direction = new Vector2(0, 1);
 
-            projectile.Activate(startPosition, direction);
+            projectile.Activate(startPosition, direction, 2, "Bullet.png");
 
             Assert.IsTrue(projectile.IsActive);
 

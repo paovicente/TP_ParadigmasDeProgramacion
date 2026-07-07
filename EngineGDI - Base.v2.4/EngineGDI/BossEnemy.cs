@@ -4,7 +4,6 @@ namespace EngineGDI
 {
     public class BossEnemy : Enemy
     {
-        private int health;
         private Player player;
         private Movement movement;
         private Vector2 direction;
@@ -19,7 +18,7 @@ namespace EngineGDI
             :base(sprite, startPos)
         {
             this.player = player;
-            health = 4;
+            health = 5;
 
             Size = new Vector2(2f, 2f);
             movement = new Movement(50f);

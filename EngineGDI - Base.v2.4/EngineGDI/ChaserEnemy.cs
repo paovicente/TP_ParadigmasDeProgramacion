@@ -11,9 +11,10 @@ namespace EngineGDI
         public ChaserEnemy(string sprite, Vector2 startPos, Player player)
             : base(sprite, startPos)
         {
+            health = 2;
             this.player = player;
             Size = new Vector2(2f, 2f);
-            movement = new Movement(150f);
+            movement = new Movement(120f);
         }
 
         public override void Update(float deltaTime)

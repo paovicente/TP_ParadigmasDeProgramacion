@@ -53,10 +53,13 @@
     <Compile Include="ChaserEnemy.cs" />
     <Compile Include="Collision.cs" />
     <Compile Include="CollisionHandler.cs" />
+    <Compile Include="DamagePowerUp.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="EnemyFactory.cs" />
     <Compile Include="EnemyType.cs" />
+    <Compile Include="FireRatePowerUp.cs" />
     <Compile Include="GameManager.cs" />
+    <Compile Include="ICollectable.cs" />
     <Compile Include="IDamageableByPlayer.cs" />
     <Compile Include="IPoolable.cs" />
     <Compile Include="IRenderable.cs" />
@@ -71,6 +74,9 @@
     <Compile Include="ObjectPool.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayerShoot.cs" />
+    <Compile Include="PowerUpFactory.cs" />
+    <Compile Include="PowerUpSpawner.cs" />
+    <Compile Include="PowerUp.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Projectile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -114,7 +120,16 @@
     <Content Include="Bullet.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="BulletDamagePower.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="ChaserEnemy.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DamagePowerUp.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="FireRatePowerUp.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="PlayerFrame2.png">

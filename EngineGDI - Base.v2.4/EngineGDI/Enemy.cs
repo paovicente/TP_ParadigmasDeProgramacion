@@ -8,6 +8,7 @@ namespace EngineGDI
         protected Transform transform;
         protected Renderer renderer;
         protected bool isActive = true;
+        protected int health = 1;
 
         public Transform Transform => transform;
         public Renderer Renderer => renderer;
@@ -75,7 +76,10 @@ namespace EngineGDI
 
         public virtual void TakeDamage(int damage)
         {
-            Deactivate();
+            health -= damage;
+
+            if (health <= 0)
+                Deactivate();
         }
 
         public virtual void Deactivate()

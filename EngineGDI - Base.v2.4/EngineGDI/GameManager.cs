@@ -27,7 +27,7 @@ namespace EngineGDI
 
         public static Player Player { get; private set; }
         public static EnemySpawner EnemySpawner { get; private set; }
-
+        public static PowerUpSpawner PowerUpSpawner { get; private set; }
         public bool SessionEnded { get; private set; }
         public bool SessionVictory { get; private set; }
 
@@ -104,7 +104,13 @@ namespace EngineGDI
             Player.Update();
 
             EnemySpawner.Update(deltaTime, screenWidth);
-            
+            PowerUpSpawner.Update(deltaTime);
+
+            CollisionSystem.HandlePowerUpCollisions(
+                PowerUpSpawner.PowerUps,
+                Player
+            );
+
             int pointsThisFrame = CollisionSystem.HandleCollisions(
                 EnemySpawner.Enemies,
                 Player.Shooter.Projectiles
@@ -137,7 +143,7 @@ namespace EngineGDI
 
         public void StartLevel(int level)
         {
-            
+            RenderSystem.Instance.Clear();
             bgRenderer = new Renderer("fondo1.png",new Transform());
 
             currentLevel = level;
@@ -158,6 +164,8 @@ namespace EngineGDI
             Player = new Player();
 
             EnemySpawner = new EnemySpawner(1.5f, Player, levelData.Enemies);
+
+            PowerUpSpawner = new PowerUpSpawner();
         }
 
         public void RemoveTime(float seconds)

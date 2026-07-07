@@ -1,4 +1,5 @@
 using EngineGDI;
+using EngineGDI.EngineGDI;
 using System.Collections.Generic;
 
 namespace EngineGDI
@@ -29,7 +30,7 @@ namespace EngineGDI
 
                     if (Collision.IsBoxColliding(bullet.Transform.Position,bullet.CollisionSize,enemy.Transform.Position,enemy.CollisionSize))
                     {
-                        enemy.TakeDamage(1);
+                        enemy.TakeDamage(bullet.Damage);
                         bullet.Deactivate();
 
                         if (!enemy.IsActive)
@@ -45,6 +46,25 @@ namespace EngineGDI
             }
 
             return pointsEarned;
+        }
+
+        public static void HandlePowerUpCollisions<T>(List<T> powerUps,Player player) where T : ICollectable
+        {
+            foreach (var powerUp in powerUps)
+            {
+                if (!powerUp.IsActive)
+                    continue;
+
+                if (Collision.IsBoxColliding(
+                    player.Transform.Position,
+                    new Vector2(32f, 32f),
+                    powerUp.Transform.Position,
+                    powerUp.CollisionSize))
+                {
+                    powerUp.Collect(player);
+                    powerUp.Deactivate();
+                }
+            }
         }
     }
 }

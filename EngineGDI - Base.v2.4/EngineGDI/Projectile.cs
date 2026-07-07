@@ -10,12 +10,14 @@ namespace EngineGDI
         private Vector2 direction;
         private float speed;
         private bool isActive;
-        private string sprite;
+        //private string sprite;
+        private int damage = 1;
 
         //encapsulation
         public Transform Transform => transform;
         public Renderer Renderer => renderer;
         public bool IsActive => isActive;
+        public int Damage => damage;
 
         public Vector2 CollisionSize => new Vector2(16f, 16f);
 
@@ -30,10 +32,12 @@ namespace EngineGDI
             RenderSystem.Instance.Register(this);
         }
 
-        public void Activate(Vector2 startPosition, Vector2 dir)
+        public void Activate(Vector2 startPosition, Vector2 dir, int damage, string sprite)
         {
             transform.Position = startPosition;
             direction = dir.Normalize();
+            this.damage = damage;
+            renderer.TexturePath = sprite;
             isActive = true;
         }
 
