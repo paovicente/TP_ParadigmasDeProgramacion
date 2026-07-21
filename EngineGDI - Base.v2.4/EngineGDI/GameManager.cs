@@ -23,69 +23,69 @@ using System.Windows.Forms;
             }
 
 
-        public static Player Player { get; private set; }
+            public static Player Player { get; private set; }
 
-        public static EnemySpawner EnemySpawner { get; private set; }
+            public static EnemySpawner EnemySpawner { get; private set; }
 
-        public static PowerUpSpawner PowerUpSpawner { get; private set; }
-        public static Bar TimeBar { get; private set; }
+            public static PowerUpSpawner PowerUpSpawner { get; private set; }
+            public static Bar TimeBar { get; private set; }
 
-        public static Bar PointsBar { get; private set; }
+            public static Bar PointsBar { get; private set; }
 
-        public static PlayerStats PlayerStats { get; private set; }
+            public static PlayerStats PlayerStats { get; private set; }
 
-        public static EnemyUI BouncingUI { get; private set; }
+            public static EnemyUI BouncingUI { get; private set; }
 
-        public static EnemyUI SpiralUI { get; private set; }
+            public static EnemyUI SpiralUI { get; private set; }
 
-        public static EnemyUI ChaserUI { get; private set; }
+            public static EnemyUI ChaserUI { get; private set; }
 
-        public static EnemyUI BossUI { get; private set; }
-
-
-        public bool SessionEnded { get; private set; }
-
-        public bool SessionVictory { get; private set; }
+            public static EnemyUI BossUI { get; private set; }
 
 
-        private float sessionTimeLeft;
+            public bool SessionEnded { get; private set; }
 
-        private int sessionScore;
-
-        private int currentLevel;
-        public int CurrentLevel => currentLevel;
-
-        public bool ShowHUD { get; set; } = true;
-
-        // Events
-        public event Action<int> OnLevelCompleted;
-
-        public event Action OnGameOver;
-
-        private GameManager()
-        {
-
-        }
+            public bool SessionVictory { get; private set; }
 
 
-        public void Initialize()
-        {
-            SessionEnded = false;
-            SessionVictory = false;
+            private float sessionTimeLeft;
 
-            sessionScore = 0;
+            private int sessionScore;
 
-            Player = null;
-            EnemySpawner = null;
-            PowerUpSpawner = null;
-            TimeBar = null;
-            PointsBar = null;
-            PlayerStats = null;
-            BouncingUI = null;
-            SpiralUI = null;
-            ChaserUI = null;
-            BossUI = null;
-        }
+            private int currentLevel;
+            public int CurrentLevel => currentLevel;
+
+            public bool ShowHUD { get; set; } = true;
+
+            // Events
+            public event Action<int> OnLevelCompleted;
+
+            public event Action OnGameOver;
+
+            private GameManager()
+            {
+
+            }
+
+
+            public void Initialize()
+            {
+                SessionEnded = false;
+                SessionVictory = false;
+
+                sessionScore = 0;
+
+                Player = null;
+                EnemySpawner = null;
+                PowerUpSpawner = null;
+                TimeBar = null;
+                PointsBar = null;
+                PlayerStats = null;
+                BouncingUI = null;
+                SpiralUI = null;
+                ChaserUI = null;
+                BossUI = null;
+            }
 
             public void StartLevel(int level, LevelData data)
             {
@@ -129,12 +129,15 @@ using System.Windows.Forms;
                     new Vector2 (1.5f, 0.2f),
                     pointsToWin);
 
+            if (PlayerStats == null)
+            {
                 PlayerStats = new PlayerStats();
+            }
 
-                BouncingUI = new EnemyUI(PlayerStats, EnemyType.Bouncing, new Vector2(830f, 100f), new Vector2(2f, 2f));
-                SpiralUI = new EnemyUI(PlayerStats, EnemyType.Spiral, new Vector2(830f, 200f), new Vector2(1.8f, 1.8f));
-                ChaserUI = new EnemyUI(PlayerStats, EnemyType.Chaser, new Vector2(830f, 300f), new Vector2(1.6f, 1.6f));
-                BossUI = new EnemyUI(PlayerStats, EnemyType.Boss, new Vector2(830f, 400f), new Vector2(1f, 1f));
+                BouncingUI = new EnemyUI(PlayerStats, EnemyType.Bouncing, new Vector2(830f, 150f), new Vector2(2f, 2f));
+                SpiralUI = new EnemyUI(PlayerStats, EnemyType.Spiral, new Vector2(830f, 220f), new Vector2(1.8f, 1.8f));
+                ChaserUI = new EnemyUI(PlayerStats, EnemyType.Chaser, new Vector2(830f, 290f), new Vector2(1.6f, 1.6f));
+                BossUI = new EnemyUI(PlayerStats, EnemyType.Boss, new Vector2(830f, 360f), new Vector2(1f, 1f));
         }
 
 

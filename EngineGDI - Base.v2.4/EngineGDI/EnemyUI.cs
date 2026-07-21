@@ -47,7 +47,7 @@ namespace EngineGDI
         {
             iconRenderer.Render();
 
-            textRenderer.Text = playerStats.GetKills(enemyType).ToString();
+            textRenderer.Text = "x " + playerStats.GetKills(enemyType).ToString();
             textRenderer.Render();
         }
 
