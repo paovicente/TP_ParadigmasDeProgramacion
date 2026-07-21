@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Animation.cs" />
+    <Compile Include="Bar.cs" />
     <Compile Include="BossEnemy.cs" />
     <Compile Include="BouncingEnemy.cs" />
     <Compile Include="Button.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="Enemy.cs" />
     <Compile Include="EnemyFactory.cs" />
     <Compile Include="EnemyType.cs" />
+    <Compile Include="EnemyUI.cs" />
     <Compile Include="FireRatePowerUp.cs" />
     <Compile Include="GameManager.cs" />
     <Compile Include="GameplayScene.cs" />
@@ -73,6 +75,7 @@
     <Compile Include="FinalMenu.cs" />
     <Compile Include="Engine.cs" />
     <Compile Include="MainMenu.cs" />
+    <Compile Include="PlayerStats.cs" />
     <Compile Include="SceneManager.cs" />
     <Compile Include="ObjectPool.cs" />
     <Compile Include="Player.cs" />
@@ -87,6 +90,7 @@
     <Compile Include="RenderSystem.cs" />
     <Compile Include="Scene.cs" />
     <Compile Include="SpiralEnemy.cs" />
+    <Compile Include="TextRenderer.cs" />
     <Compile Include="Transform.cs" />
     <Compile Include="Vector2.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -112,6 +116,18 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="BarEmpty1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BarEmpty2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BarFull1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="BarFull2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="BasicEnemy.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -7,6 +7,7 @@ namespace EngineGDI
 
         public override int PointsOnKill => 4;
         public override Vector2 RenderScale => new Vector2(2f, 2f);
+        public override EnemyType Type => EnemyType.Chaser;
 
         public ChaserEnemy(string sprite, Vector2 startPos, Player player)
             : base(sprite, startPos)

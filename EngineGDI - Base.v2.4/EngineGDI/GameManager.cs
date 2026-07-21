@@ -23,49 +23,69 @@ using System.Windows.Forms;
             }
 
 
-            public static Player Player { get; private set; }
+        public static Player Player { get; private set; }
 
-            public static EnemySpawner EnemySpawner { get; private set; }
+        public static EnemySpawner EnemySpawner { get; private set; }
 
-            public static PowerUpSpawner PowerUpSpawner { get; private set; }
+        public static PowerUpSpawner PowerUpSpawner { get; private set; }
+        public static Bar TimeBar { get; private set; }
 
+        public static Bar PointsBar { get; private set; }
 
-            public bool SessionEnded { get; private set; }
+        public static PlayerStats PlayerStats { get; private set; }
 
-            public bool SessionVictory { get; private set; }
+        public static EnemyUI BouncingUI { get; private set; }
 
+        public static EnemyUI SpiralUI { get; private set; }
 
-            private float sessionTimeLeft;
+        public static EnemyUI ChaserUI { get; private set; }
 
-            private int sessionScore;
-
-            private int currentLevel;
-            public int CurrentLevel => currentLevel;
-
-            public bool ShowHUD { get; set; } = true;
-
-            // Events
-            public event Action<int> OnLevelCompleted;
-
-            public event Action OnGameOver;
-
-            private GameManager()
-            {
-
-            }
+        public static EnemyUI BossUI { get; private set; }
 
 
-            public void Initialize()
-            {
-                SessionEnded = false;
-                SessionVictory = false;
+        public bool SessionEnded { get; private set; }
 
-                sessionScore = 0;
+        public bool SessionVictory { get; private set; }
 
-                Player = null;
-                EnemySpawner = null;
-                PowerUpSpawner = null;
-            }
+
+        private float sessionTimeLeft;
+
+        private int sessionScore;
+
+        private int currentLevel;
+        public int CurrentLevel => currentLevel;
+
+        public bool ShowHUD { get; set; } = true;
+
+        // Events
+        public event Action<int> OnLevelCompleted;
+
+        public event Action OnGameOver;
+
+        private GameManager()
+        {
+
+        }
+
+
+        public void Initialize()
+        {
+            SessionEnded = false;
+            SessionVictory = false;
+
+            sessionScore = 0;
+
+            Player = null;
+            EnemySpawner = null;
+            PowerUpSpawner = null;
+            TimeBar = null;
+            PointsBar = null;
+            PlayerStats = null;
+            BouncingUI = null;
+            SpiralUI = null;
+            ChaserUI = null;
+            BossUI = null;
+        }
 
             public void StartLevel(int level, LevelData data)
             {
@@ -93,9 +113,29 @@ using System.Windows.Forms;
                     data.Enemies
                 );
 
-
                 PowerUpSpawner = new PowerUpSpawner();
-            }
+
+                TimeBar = new Bar(
+                    "BarEmpty1.png",
+                    "BarFull1.png",
+                    new Vector2 (50f, 50f),
+                    new Vector2 (1.5f, 0.2f),
+                    sessionDuration);
+
+                PointsBar = new Bar(
+                    "BarEmpty2.png",
+                    "BarFull2.png",
+                    new Vector2 (750f, 50f),
+                    new Vector2 (1.5f, 0.2f),
+                    pointsToWin);
+
+                PlayerStats = new PlayerStats();
+
+                BouncingUI = new EnemyUI(PlayerStats, EnemyType.Bouncing, new Vector2(830f, 100f), new Vector2(2f, 2f));
+                SpiralUI = new EnemyUI(PlayerStats, EnemyType.Spiral, new Vector2(830f, 200f), new Vector2(1.8f, 1.8f));
+                ChaserUI = new EnemyUI(PlayerStats, EnemyType.Chaser, new Vector2(830f, 300f), new Vector2(1.6f, 1.6f));
+                BossUI = new EnemyUI(PlayerStats, EnemyType.Boss, new Vector2(830f, 400f), new Vector2(1f, 1f));
+        }
 
 
             public void Update(float deltaTime, int screenWidth)
@@ -104,6 +144,7 @@ using System.Windows.Forms;
                     return;
 
                 sessionTimeLeft -= deltaTime;
+                TimeBar.BarCurrent = sessionTimeLeft;
 
                 if (sessionTimeLeft < 0)
                     sessionTimeLeft = 0;
@@ -130,6 +171,7 @@ using System.Windows.Forms;
                     );
 
                 sessionScore += pointsThisFrame;
+                PointsBar.BarCurrent = sessionScore;
 
                 if (sessionScore >= pointsToWin)
                 {
@@ -202,7 +244,6 @@ using System.Windows.Forms;
                     "Consolas"
                 );
             }
-
         }
     }
 

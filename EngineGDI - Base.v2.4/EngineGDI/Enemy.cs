@@ -27,11 +27,13 @@ namespace EngineGDI
         public bool IsActive => isActive;
 
         public abstract int PointsOnKill { get; }
+        public abstract EnemyType Type { get; }
 
         public virtual Vector2 RenderScale => Size;
 
         public event Action<float> OnPlayerHit;
         public event Action<Vector2> OnSpawnRequested;
+        public static event Action<EnemyType> EnemyKilled;
 
         public Enemy(string sprite, Vector2 startPos)
         {
@@ -79,7 +81,15 @@ namespace EngineGDI
             health -= damage;
 
             if (health <= 0)
+            {
+                Die();
                 Deactivate();
+            }
+        }
+
+        public virtual void Die()
+        {
+            EnemyKilled?.Invoke(Type);
         }
 
         public virtual void Deactivate()

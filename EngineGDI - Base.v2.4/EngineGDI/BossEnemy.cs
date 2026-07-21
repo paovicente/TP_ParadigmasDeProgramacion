@@ -13,6 +13,8 @@ namespace EngineGDI
         public override int PointsOnKill => 6;
         public override Vector2 RenderScale => new Vector2(0.5f, 0.5f);
         public override Vector2 CollisionSize => new Vector2(64f, 64f);
+        public override EnemyType Type => EnemyType.Boss;
+
 
         public BossEnemy(string sprite, Vector2 startPos, Player player)
             :base(sprite, startPos)
@@ -62,12 +64,15 @@ namespace EngineGDI
             if (health <= 0)
             {
                 Die();
+                Summon();
             }
         }
 
-        private void Die()
+        private void Summon()
         {
             isActive = false;
+
+
 
             RequestSpawn(transform.Position);
         }
