@@ -37,7 +37,9 @@ namespace EngineGDI
         public override void Update(float deltaTime)
         {
             bool move = Engine.OnKeyDown(Keys.Down) ||
-                        Engine.OnKeyDown(Keys.S);
+                        Engine.OnKeyDown(Keys.S) ||
+                        Engine.OnKeyDown(Keys.Up) ||
+                        Engine.OnKeyDown(Keys.W);
 
             if (move)
             {
